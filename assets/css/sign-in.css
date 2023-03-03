@@ -1,0 +1,40 @@
+.create-heading {
+  padding: 5rem 5rem 3rem 5.5rem;
+}
+.sign-in-card {
+  margin-left: 4rem;
+  margin-top: 1rem;
+}
+.name {
+  padding-right: 5rem;
+}
+.text {
+  width: 20rem;
+}
+.sign-in-image {
+  height: 30rem;
+  width: 50rem;
+}
+.signin-email,
+.signin-key {
+  padding-top: 2rem;
+  width: 45rem;
+  margin-left: 0.7rem;
+}
+.sign-in-pass {
+  padding-top: 2rem;
+}
+.log-in-btn {
+  margin: auto;
+  padding: 2rem 2rem 2rem 1rem;
+}
+.log-btn {
+  width: 10rem;
+  background-color: #3d008b;
+}
+.log-btn:hover,
+.log-btn:active {
+  background-color: #ffff !important;
+  color: var(--nav-bar);
+  border: 0.1rem solid var(--nav-bar);
+}

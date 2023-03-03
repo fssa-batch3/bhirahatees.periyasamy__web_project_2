@@ -1,0 +1,90 @@
+.profile-card {
+  margin: 3rem 0rem 0rem 2rem;
+  display: flex;
+}
+.img-container {
+  padding: 3rem 2rem 1rem 5rem;
+}
+.profile-image {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  height: 20rem;
+}
+.profile-name {
+  padding: 1rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.deatils-container {
+  padding-top: 3.5rem;
+}
+.key-container {
+  font-size: 1.2rem;
+  padding: 5rem 0rem 0.5rem 8rem;
+}
+.name-container {
+  width: 30rem;
+  font-size: 1.2rem;
+  padding: 0rem 0rem 0.5rem 4rem;
+}
+.key-container {
+  margin: 0;
+  /* padding-top: 2rem; */
+  padding-left: 4.7rem;
+  width: 40rem;
+}
+.key {
+  flex: 1;
+}
+.keyholder {
+  flex: 0.2;
+}
+.last-name-container {
+  width: 30rem;
+  font-size: 1.2rem;
+}
+.input-style {
+  background-color: #fffaf6;
+  border: 2px solid #fffaf6;
+}
+.contain-style {
+  padding-top: 2rem;
+}
+.name-input,
+.last-name-input,
+.org-input,
+.position-input {
+  padding-left: 1rem;
+  color: black;
+  width: 10rem;
+  flex: 1;
+}
+.org-input {
+  margin-top: 1rem;
+  padding-left: 0;
+  width: 30rem;
+}
+.last-name-input,
+.postion-input {
+  flex: 1;
+}
+.email {
+  width: 30rem;
+}
+label {
+  padding-right: 1rem;
+}
+
+.button-container {
+  padding-top: 4rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.change-button,
+.delete-button {
+  margin: 4rem;
+  margin-left: 1rem;
+  margin-top: 0;
+  padding: 0.2rem 4rem;
+}

@@ -1,0 +1,75 @@
+.ticket-count {
+  margin: 4rem 0rem 0rem 0rem;
+  display: flex;
+  padding-right: 4rem;
+  flex-wrap: wrap;
+}
+.total-ticket {
+  background-color: #fffaf6;
+  flex: 1;
+  border-radius: 0.3rem;
+  width: 5rem;
+  margin-left: 6rem;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1);
+}
+.total {
+  margin-left: 3rem;
+}
+.tot-ticket {
+  width: 16rem;
+  padding: 1rem 2rem 5rem 1rem;
+}
+.high-priority {
+  width: 16rem;
+  padding: 0rem 0rem 2rem 0rem;
+  /* margin-right: 3rem; */
+}
+.count {
+  font-size: 1.5rem;
+  padding-left: 3rem;
+}
+.priority-count {
+  padding-left: 3rem;
+}
+.high {
+  padding: 1rem 2rem 2rem 2rem;
+}
+.tot,
+.close {
+  padding-left: 2.5rem;
+  padding-bottom: 3.7rem;
+}
+.ticket-container {
+  display: flex;
+  margin: 2rem 1.8rem;
+  width: 30rem;
+  flex-direction: column;
+  padding-left: 2rem;
+  flex-wrap: wrap;
+}
+.ticket {
+  background-color: #fffaf6;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1);
+  width: 24.4rem;
+  height: 13rem;
+  border-radius: 0.3rem;
+  margin-top: 2rem;
+}
+.total-ticket:hover,
+.ticket:hover {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+}
+.graph-container {
+  padding: 4rem 0rem 2rem 0rem;
+}
+
+.graph {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fffaf6;
+  height: 28rem;
+  width: 55.5rem;
+  border-radius: 0.3rem;
+}
+.graph:hover {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+}

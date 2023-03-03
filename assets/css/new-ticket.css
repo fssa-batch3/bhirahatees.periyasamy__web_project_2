@@ -1,0 +1,25 @@
+.raise-email {
+  padding: 3.5rem 5rem 1rem 5.5rem;
+}
+.ticket-email {
+  width: 60rem;
+}
+.ticket-summary {
+  margin-top: 4rem;
+}
+.ticketing-status,
+.ticketing-priority {
+  width: 45rem;
+  flex: 1;
+  padding: 3rem 2rem 3rem 0rem;
+}
+.ticketing-priority {
+  padding-right: 0;
+}
+.dropdown-ticket {
+  padding-left: 0;
+  padding-right: 0;
+}
+.member-heading {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}

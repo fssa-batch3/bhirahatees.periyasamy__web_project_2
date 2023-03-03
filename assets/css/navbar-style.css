@@ -1,0 +1,58 @@
+/* navbar styles */
+.nav-bar {
+  list-style: none;
+  flex: 4;
+  display: flex;
+  padding-top: 0.4rem;
+  justify-content: space-evenly;
+}
+.nav--items {
+  display: flex;
+  padding: 0rem 2rem;
+}
+
+.nav-container {
+  padding: 0rem 1rem 1rem 1rem;
+  flex: 0.7;
+  height: 4rem;
+  padding-left: 5rem;
+  width: 8rem;
+}
+.link {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  padding-bottom: 0.9rem;
+}
+.nav--items:hover {
+  color: #fffaf6;
+  box-shadow: 0 2px 0 0 rgba(255, 255, 255, 1);
+}
+.profile-setting {
+  flex: 1;
+  padding: 0.4rem 1rem 2rem 5rem;
+}
+.profile-logo {
+  height: 2rem;
+  width: 2rem;
+}
+.tickets-row {
+  padding: 2rem;
+}
+.tickets-column {
+  background-color: #fffbf9;
+  height: 45rem;
+  width: 90rem;
+  border-radius: 0.3rem;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+}
+#member-list {
+  background-color: white;
+  height: fit-content;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0);
+}
+.new-ticket {
+  width: 76rem;
+  height: 43rem;
+  margin-left: 7rem;
+  margin-top: 3rem;
+}
