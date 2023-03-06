@@ -14,6 +14,15 @@
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <link rel="stylesheet" href=../../assets/css/sign-in.css>
   </head>
+  <style>
+    input:valid {
+      box-shadow: inset 0 1px 1px rgb(0, 255, 0), 0 0 8px rgba(7, 188, 46, 0.6);
+    }
+
+    input:invalid {
+      box-shadow: inset 0 1px 1px rgb(228, 19, 19), 0 0 8px rgba(236, 8, 8, 0.6);
+    }
+  </style>
   <body>
     <header>
       <!-- using symantic tags -->
@@ -36,18 +45,22 @@
             <div class="form-floating mb-3 name input">
               <input
                 type="text"
-                class="form-control text"
+                class="form-control first-name text"
                 id="floatingInput"
+                pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"
                 placeholder="Steve"
+                required
               />
               <label for="floatingInput">First Name</label>
             </div>
             <div class="form-floating mb-3 input">
               <input
                 type="text"
-                class="form-control text"
+                class="form-control text last-name"
+                pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"
                 id="floatingInput"
                 placeholder="Rogers"
+                required
               />
               <label for="floatingInput">Last Name</label>
             </div>
@@ -59,6 +72,7 @@
                 class="form-control email"
                 id="floatingInput"
                 placeholder="name@example.com"
+                required
               />
               <label for="floatingInput">Email address</label>
             </div>
@@ -67,9 +81,10 @@
             <div class="form-floating mb-3 input">
               <input
                 type="text"
-                class="form-control"
+                class="form-control key"
                 id="floatingInput"
                 placeholder="name@example.com"
+                required
               />
               <label for="floatingInput">Sharing Key (optional)</label>
             </div>
@@ -78,18 +93,21 @@
             <div class="form-floating name">
               <input
                 type="password"
-                class="form-control text"
-                id="floatingPassword"
+                class="form-control text password"
+                id="floatingPassword password"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                 placeholder="Password"
+                required
               />
               <label for="floatingPassword">Password</label>
             </div>
             <div class="form-floating name">
               <input
                 type="password"
-                class="form-control text"
+                class="form-control text confo-password"
                 id="floatingPassword"
                 placeholder="Password"
+                required
               />
               <label for="floatingPassword">Confirm Password</label>
             </div>
@@ -112,10 +130,47 @@
       <a href="../Ticket Page/dashboard.html"></a>
     </section>
   </body>
+  <script></script>
   <script>
     document.getElementById("sign-in-btn").addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location.href = "../Ticket Page/dashboard.html";
+      let arr = [];
+      let existDatas = JSON.parse(localStorage.getItem("signinData"));
+      let validation = false;
+      let data = new Object();
+
+      data["name"] =
+        document.querySelector(".first-name").value.trim() +
+        " " +
+        document.querySelector(".last-name").value.trim();
+      console.log(name);
+      data["email"] = document.querySelector(".email").value.toLowerCase();
+      data["key"] = document.querySelector(".key").value.trim();
+      data["password"] = document.querySelector(".password").value.trim();
+      if (existDatas !== null) {
+        validation = existDatas.find((o) => o["email"] === data["email"]);
+      }
+      if (
+        data.password.trim() !==
+        document.querySelector(".confo-password").value.trim()
+      ) {
+        document.querySelector(".confo-password").style.boxShadow =
+          "inset 0 1px 1px rgb(228, 19, 19), 0 0 8px rgba(236, 8, 8, 0.6)";
+        return alert("Password Not Match");
+      }
+
+      if (validation) {
+        return alert("User Already Exists");
+      } else {
+        if (existDatas !== null) {
+          existDatas.push(data);
+          localStorage.setItem("signinData", JSON.stringify(existDatas));
+          window.location.href = "./login.html";
+        } else {
+          arr.push(data);
+          localStorage.setItem("signinData", JSON.stringify(arr));
+          window.location.href = "./login.html";
+        }
+      }
     });
   </script>
 </html>

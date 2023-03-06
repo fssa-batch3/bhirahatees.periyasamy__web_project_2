@@ -23,7 +23,7 @@
       <nav class="navbar container-fluid sticky-top header">
         <!-- navbar -->
         <div class="container nav-container">
-          <a class="navbar-brand nav-href nav-" href="../../index.html">
+          <a class="navbar-brand nav-href nav-" href="./dashboard.html">
             <!-- <img class="logo" src="#" alt="#" /> -->
             Title
           </a>
@@ -418,6 +418,13 @@
         organization: "freshworks software academy ",
       },
     ];
+    let formClass = [
+      "name-input",
+      "last-name-input",
+      "email",
+      "org-input",
+      "position-input",
+    ];
     let image = document
       .querySelector(".profile-image")
       .setAttribute("src", profiles[0].profileLink);
@@ -437,6 +444,7 @@
       let changeButton = document.createElement("button");
       changeButton.innerHTML = "Change";
       changeButton.classList.add("change-button");
+      changeButton.setAttribute("id", "change-btn");
       buttonContainer.append(changeButton);
       let deleteButton = document.createElement("button");
       deleteButton.innerHTML = "Delete";
@@ -447,6 +455,22 @@
     let buttons = createButtons();
     let formBtn = document.querySelector(".deatils-container");
     formBtn.append(buttons);
+    function editProfile(cls) {
+      let changeBtn = document.getElementById("change-btn");
+      changeBtn.onclick = () => {
+        document.querySelector(".change-button").remove();
+        document.querySelector(".delete-button").remove();
+        for (let i = 0; i < cls.length; i++) {
+          document.querySelector(`.${cls[i]}`).removeAttribute("disabled");
+        }
+        let saveButton = document.createElement("button");
+        saveButton.classList.add("change-button");
+        saveButton.setAttribute("id", "save-btn");
+        saveButton.innerText = "Save";
+        document.querySelector(".button-container").append(saveButton);
+      };
+    }
+    editProfile(formClass);
   </script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
