@@ -83,8 +83,17 @@ label {
 
 .change-button,
 .delete-button {
+  background-color: #3d008b;
+  color: #ffffff;
+  border: 2px solid #3d008b;
+  border-radius: 0.3rem;
   margin: 4rem;
   margin-left: 1rem;
   margin-top: 0;
   padding: 0.2rem 4rem;
+}
+
+.change-button:hover,
+.delete-button:hover {
+  opacity: 0.7;
 }
