@@ -66,14 +66,37 @@
             >
           </li>
         </ul>
-        <div class="profile-setting">
-          <a href="">
+        <div class="dropdown profile-setting">
+          <a
+            class="btn dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             <img
               class="profile-logo"
               src="../../assets/images/person-circle.svg"
               alt=""
             />
           </a>
+
+          <ul class="dropdown-menu profile-drop">
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item log-out" href="../../index.html"
+                >Log out</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
@@ -112,365 +135,41 @@
               <input class="position-input input-style" type="text" disabled />
             </div>
           </div>
+          <div class="button-container">
+            <button class="change-button" id="change-btn">Edit</button>
+            <button class="delete-button" id="del-btn">Delete</button>
+          </div>
         </div>
       </div>
     </section>
   </body>
   <script>
     let sharingKey = crypto.randomUUID();
-    let profiles = [
-      {
-        name: "Bhirahatees Periyasamy (You)",
-        email: "bhirahatees.periyasamy@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V838E74-a1111be2d28e-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Prasannabharati Ram",
-        email: "prasannabharati.ram@freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-UU2P5F45Q-50cbf8f1e669-512",
-        position: "Lead - CSR",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Ahamed M",
-        email: "ahamed.m@ctr.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U044UJED2KU-062bc9ce0ac6-512",
-        position: "CSR Executive",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Akshaya Sivakumar",
-        email: "akshaya.sivakumar@ctr.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U03S1PMUN4F-a20643f9f8cc-512",
-        position: "ELS Coach",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Bharathwaj Soundararajan",
-        email: "bharathwaj.soundararajan@ctr.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U03P5LA64E7-1acf61ffb14d-512",
-        position: "Tech Coach",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Lisha Das",
-        email: "lisha.das@ctr.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U031X3ZQ5EW-7e0234ffa3db-512",
-        position: "ELS Coach",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Revathi Iyer",
-        email: "revathi.iyer@freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-UUH4J270U-g77bd888f56c-512",
-        position: "ELS Coach",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Surya Umapathy",
-        email: "surya.umapathy@ctr.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U02M6DXMG5N-64261edc50e8-512",
-        position: "Tech Coach",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Vinit Gore",
-        email: "vinit.gore@ctr.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U03S2G19E2Z-2925e58a5dd9-512",
-        position: "Tech Coach",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Abdul Razzak",
-        email: "abdulrazak.nasriudeen@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V4PT519-fc40279a4acf-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Ajaikumar Nataraj",
-        email: "ajaikumar.nataraj@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U04291URDLH-f74388fdc584-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-
-      {
-        name: "Alsabana Sahubarali",
-        email: "alsabana.sahubarali@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V4TPJ11-g85635e90d27-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Aravindth Kannan",
-        email: "aravindth.kannan@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V4U59PD-af5a4542cdba-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Arunkumar Dhanraj",
-        email: "arunkumar.dhanraj@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041XM05TC4-0f04e388aca2-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-
-      {
-        name: "Chandru Raj",
-        email: "chandru.raj@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V83A2BC-115443b4ac9c-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "GopiKannan Saravanan",
-        email: "gopikannan.saravanan@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041NKBPV4N-27e46ea9ea9e-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Gowtham Sathyamoorthy",
-        email: "gowtham.sathyamoorthy@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U042JUK9000-eb14a52eae5a-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Ishwarya Sankar",
-        email: "ishwarya.sankar@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041XM0UPGU-g66f88160489-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Jayaprakash Jaisankar",
-        email: "jayaprakash.jaisankar@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U042JUKD4CQ-32cf205d0162-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Kamalesh Srinivasan",
-        email: "kamalesh.srinivasan@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V4TE3L3-272932b1eed7-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Karthik Pannerselvam",
-        email: "karthik.pannerselvam@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U042JUK1M6C-27d5b4326663-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Kishor Muruganandham",
-        email: "kishor.muruganandham@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U042JUJR1SL-ec28aef46728-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Lakshmipriya Suntharaj",
-        email: "lakshmipriya.suntharaj@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V4UFKA7-gb6cc547d1b1-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Logesh Venkatesan",
-        email: "logesh.venkatesan@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041NKA4JDC-770a9d11e985-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Mohammedajmal Iqbol",
-        email: "mohammedajmal.iqbol@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V83A4PL-e856d93352f7-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Muthuselvam Kumaravel",
-        email: "muthuselvam.kumaravel@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V837X98-gcbe23635f5f-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Naveenasri Nagarajan",
-        email: "naveenasri.nagarajan@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V83V1C2-080174fbffce-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Nithyashri Rameshbabu",
-        email: "nithyashri.rameshbabu@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041NKBTPB8-74849a60c72f-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Praveenkumar Gopinath",
-        email: "praveenkumar.gopinath@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041NKAF1E2-03bae0dd1fdf-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Saran Selvaraj",
-        email: "saran.selvaraj@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041NKC6B7Y-g0240b33274a-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Sridevan Nanthagopal",
-        email: "sridevan.nanthagopal@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041XM0M9N0-3a4d038fe695-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Susikumar Pitchaimuthu",
-        email: "susikumar.pitchaimuthu@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041S902NTF-f7590b25c46b-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Utchikanna Neelakandan",
-        email: "utchikanna.neelakandan@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041ELXDT55-2716e206192a-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Vanitha Velu",
-        email: "vanitha.velu@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041S8ZAB6H-d63ac810f86c-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Veeramuthu Kathirvel",
-        email: "veeramuthu.kathirvel@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041S8WSF29-9b28e1a65221-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Vignesh Ulaganathan",
-        email: "vignesh.ulaganathan@fssa.freshworks.com",
-        profileLink:
-          "https://lh3.googleusercontent.com/CzQA4hJzPaE_99Ech6pXKjp8jzkcGpkKEVokF7exBsKuYOiH88sQQfF4VhfCfqE59-alE_wvR9gTdZoskz2FmI8wQPhiceP6w2y3WQirR9jOYDA124PJGxog0AZ_oi2WD-UC4ZW6XUERyvCmfz1z00qHfnLf5zbwWg-BckyAjf5Yl694esxi3S9JOtDPl_hq2ynOrpi6G6DGTalCkNwBJB8jmqmjIa8yp6T1O5lHTUXfDm8Nuwqa8KKZT6NW1fYL87na6jrxG8mVejJZ8pJtMMeYj7eq0wbA7FiK1zdkiVUcg-HQMRFyxWErsC1mi8U-kkMwH9E2iV8NvgfuoBy-JvOLSVgUiQJQXhOUEWX45Pf21bhRENpSQnxVXN4W_PMzTkdpvWlgrHUnlc2zHKm0t5YJsG5bRfg3HABYDOzvZ32jXSVZoVyagRuU4QbSZbRgrPJNrAnG9RD7UvdrQSX-89E7vQgZQ8_ST7ALaiJ081Wj8dcgfEgXrFFIv12p4aJt_pqNyAvMJse_TaH1_ViFiXCsdDWcHBh7uva3kMB-vabGQw1zgHYA6_T2g_kotQLVeW-ebt43jpVKE4FibYKzS28ZZRcmlYsxHP5fgmhZD00qRljlCAskIqhkQbwQKJRlZiD8kSi2_GuuVjCc8VQCwVOFqWMtKiad8Hdh9iLRVFMJConrGNCA_DD4l6ueEq6THIXJLdwFHwwD5FsZ4kGUxgW8yD81aWbSYH-ZqwTGxA5tfvh7mf8PtzN0bZQf_mdzXPgeIjek7hfdFaEQN9GOpu4-sdW0P0360P_0zbcULbkUAAK2jpkRj3u8dpx8vkp13N8vnQI2d47-hK00bVVhHhnNmtx1YUdmDkAveuJFaqAwEV1GENu6s1RN68l_SMsl4P4yXjy6Uwp2w1AvbLHAjGNdJmz5e0UPVa5uBP1-BPh-ilj1=w504-h671-no?authuser=0",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-      {
-        name: "Yogeshwaran Govindaraj",
-        email: "yogeshwaran.govindaraj@fssa.freshworks.com",
-        profileLink:
-          "https://ca.slack-edge.com/T032648LE-U041V4TRAM9-a4010cb46546-512",
-        position: "Student",
-        organization: "freshworks software academy ",
-      },
-    ];
-    let formClass = [
-      "name-input",
-      "last-name-input",
-      "email",
-      "org-input",
-      "position-input",
-    ];
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+    let user = window.localStorage.getItem("userEmail");
+    let profiles = userData.find((e) => e.email === user);
     let image = document
       .querySelector(".profile-image")
-      .setAttribute("src", profiles[0].profileLink);
+      .setAttribute("src", profiles.profileLink);
     let userName = document.querySelector(".profile-name");
-    userName.innerText = profiles[0].name;
+    userName.innerText = profiles.name;
     let key = document.querySelector(".key");
-    key.innerText = sharingKey;
-    let names = profiles[0].name.split(" ");
+    key.innerText = profiles["key"];
+    let names = profiles.name.split(" ");
     document.querySelector(".name-input").value = names[0];
     document.querySelector(".last-name-input").value = names[1];
-    document.querySelector(".email").value = profiles[0].email;
-    document.querySelector(".org-input").value = profiles[0].organization;
-    document.querySelector(".position-input").value = profiles[0].position;
-    function createButtons() {
-      let buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("button-container");
-      let changeButton = document.createElement("button");
-      changeButton.innerHTML = "Change";
-      changeButton.classList.add("change-button");
-      changeButton.setAttribute("id", "change-btn");
-      buttonContainer.append(changeButton);
-      let deleteButton = document.createElement("button");
-      deleteButton.innerHTML = "Delete";
-      deleteButton.classList.add("delete-button");
-      buttonContainer.append(deleteButton);
-      return buttonContainer;
-    }
-    let buttons = createButtons();
-    let formBtn = document.querySelector(".deatils-container");
-    formBtn.append(buttons);
-    function editProfile(cls) {
-      let changeBtn = document.getElementById("change-btn");
-      changeBtn.onclick = () => {
-        document.querySelector(".change-button").remove();
-        document.querySelector(".delete-button").remove();
-        for (let i = 0; i < cls.length; i++) {
-          document.querySelector(`.${cls[i]}`).removeAttribute("disabled");
-        }
-        let saveButton = document.createElement("button");
-        saveButton.classList.add("change-button");
-        saveButton.setAttribute("id", "save-btn");
-        saveButton.innerText = "Save";
-        document.querySelector(".button-container").append(saveButton);
-      };
-    }
-    editProfile(formClass);
+    document.querySelector(".email").value = profiles.email;
+    document.querySelector(".org-input").value = profiles.organization;
+    document.querySelector(".position-input").value = profiles.position;
+    document.getElementById("change-btn").onclick = () => {
+      window.location.href = "./edit-profile.html";
+    };
+    document.getElementById("del-btn").onclick = () => {
+      let dataIndex = userData.indexOf(profiles);
+      userData.splice(dataIndex, 1);
+      window.localStorage.setItem("signinData", userData);
+      window.location.href = "../../index.html";
+    };
   </script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

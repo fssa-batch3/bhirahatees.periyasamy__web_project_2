@@ -1,5 +1,5 @@
 :root {
-  --nav-bar: #3d008b;
+  --nav-bar: #6a1ad3;
   --body-color: #ffffff;
   --nav-button: #a2a2a1ff;
   --card-color: #fee1feee;
@@ -65,6 +65,16 @@
 .gif-image {
   height: 40rem;
   padding: 10rem 0rem 5rem 10rem;
+}
+.profile-setting {
+  color: #3d008b;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+}
+.dropdown-item {
+  padding-left: 1.8rem;
 }
 .get-started {
   width: 10rem;
@@ -231,6 +241,7 @@
   width: 1.1rem;
   background-color: green;
 }
+
 .high--priority {
   margin-top: 0.27rem;
   border-radius: 2rem;
@@ -247,7 +258,16 @@
   width: 1.1rem;
   background-color: rgb(230, 255, 7);
 }
+.profile-drop {
+  margin-top: 0;
+  margin-left: 3rem;
+}
+.profile-setting {
+  margin-bottom: 1rem;
+  padding-bottom: 0.65rem;
+}
 .drop {
+  margin-top: 2rem;
   margin-left: 35rem;
   padding: 0.1rem 0rem;
 }
@@ -272,7 +292,9 @@
   width: 15rem;
   padding-left: 0.3rem;
 }
-
+.log-out:hover {
+  background-color: red;
+}
 /* .member-name {
   flex: 1;
   padding-left: 0.5rem;

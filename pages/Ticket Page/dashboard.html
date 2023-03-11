@@ -22,7 +22,10 @@
       <nav class="navbar container-fluid sticky-top header">
         <!-- navbar -->
         <div class="container nav-container">
-          <a class="navbar-brand nav-href nav-" href="../Ticket Page/dashboard.html">
+          <a
+            class="navbar-brand nav-href nav-"
+            href="../Ticket Page/dashboard.html"
+          >
             <!-- <img class="logo" src="#" alt="#" /> -->
             Title
           </a>
@@ -31,9 +34,9 @@
           <li class="nav--items">
             <a class="nav-link link" href="./dashboard.html">Dashboard</a>
           </li>
-          <li class="nav--items">
+          <li class="nav--items tickets-nav">
             <a
-              class="nav-link link dropdown-toggle"
+              class="nav-link link tickets-nav dropdown-toggle"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
@@ -65,14 +68,37 @@
             >
           </li>
         </ul>
-        <div class="profile-setting">
-          <a href="../Ticket Page/profile.html">
+        <div class="dropdown profile-setting">
+          <a
+            class="btn dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             <img
               class="profile-logo"
               src="../../assets/images/person-circle.svg"
               alt=""
             />
           </a>
+
+          <ul class="dropdown-menu profile-drop">
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item log-out" href="../../index.html"
+                >Log out</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
     </header>

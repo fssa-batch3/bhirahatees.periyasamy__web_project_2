@@ -143,9 +143,16 @@
         " " +
         document.querySelector(".last-name").value.trim();
       console.log(name);
+      data.profileLink =
+        "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/89f9adda-0ce2-41ca-bd0a-629c69bba8e5/dapuv77-136f3b3e-66ea-4d43-9bbd-e38008c80c4f.png/v1/fill/w_1024,h_1191,strp/deadpool_png__3_by_anna_x_anarchy_dapuv77-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTE5MSIsInBhdGgiOiJcL2ZcLzg5ZjlhZGRhLTBjZTItNDFjYS1iZDBhLTYyOWM2OWJiYThlNVwvZGFwdXY3Ny0xMzZmM2IzZS02NmVhLTRkNDMtOWJiZC1lMzgwMDhjODBjNGYucG5nIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.TrD-FIdUthi-6Mnxfv0H4QR0Qhp5QJENX2DhEpiZXQ8";
       data["email"] = document.querySelector(".email").value.toLowerCase();
       data["key"] = document.querySelector(".key").value.trim();
       data["password"] = document.querySelector(".password").value.trim();
+      data["organization"] = "Add";
+      data["position"] = "Add";
+      if (document.querySelector(".key").value === null) {
+        data["key"] = crypto.randomUUID();
+      }
       if (existDatas !== null) {
         validation = existDatas.find((o) => o["email"] === data["email"]);
       }
@@ -163,11 +170,11 @@
       } else {
         if (existDatas !== null) {
           existDatas.push(data);
-          localStorage.setItem("signinData", JSON.stringify(existDatas));
+          window.localStorage.setItem("signinData", JSON.stringify(existDatas));
           window.location.href = "./login.html";
         } else {
           arr.push(data);
-          localStorage.setItem("signinData", JSON.stringify(arr));
+          window.localStorage.setItem("signinData", JSON.stringify(arr));
           window.location.href = "./login.html";
         }
       }

@@ -41,7 +41,7 @@
             <input
               type="email"
               class="form-control email"
-              id="floatingInput"
+              id="floatingInput user-email"
               placeholder="name@example.com"
             />
             <label for="floatingInput">Email address</label>
@@ -49,8 +49,8 @@
           <div class="form-floating">
             <input
               type="password"
-              class="form-control"
-              id="floatingPassword"
+              class="form-control password"
+              id="floatingPassword user-password"
               placeholder="Password"
             />
             <label for="floatingPassword">Password</label>
@@ -62,9 +62,22 @@
     </section>
   </body>
   <script>
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+
     document.getElementById("login-btn").addEventListener("click", (e) => {
       e.preventDefault();
-      window.location.href = "../Ticket Page/dashboard.html";
+      let email = document.querySelector(".email").value.toLowerCase();
+      let password = document.querySelector(".password").value;
+      let data = userData.find((e) => email === e["email"]);
+      if (email === null && password === null) {
+        return alert("Invallid Details");
+      } else if (data === undefined) {
+        return alert("invalid user or email");
+      } else if (email === data.email && password === data.password) {
+        localStorage.setItem("userEmail", email);
+        window.location.href = "../Ticket Page/dashboard.html";
+        return alert("success");
+      }
     });
   </script>
 </html>

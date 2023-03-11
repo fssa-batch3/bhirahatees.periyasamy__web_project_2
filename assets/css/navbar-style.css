@@ -1,4 +1,8 @@
 /* navbar styles */
+/* .nav--bar {
+  backdrop-filter: blur(20px);
+} */
+
 .nav-bar {
   list-style: none;
   flex: 4;
