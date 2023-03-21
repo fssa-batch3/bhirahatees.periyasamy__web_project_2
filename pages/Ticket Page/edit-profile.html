@@ -130,11 +130,11 @@
           <div class="container-fluid contain-style">
             <div class="name-container">
               <label class="firstName">Organization : </label>
-              <input class="org-input input-style" type="text" />
+              <input class="org-input" disabled type="text" />
             </div>
             <div class="name-container last-name-container">
               <label class="lastName">Position : </label>
-              <input class="position-input input-style" type="text" />
+              <input class="position-input" type="text" disabled />
             </div>
           </div>
           <div class="button-container">
@@ -150,19 +150,27 @@
     }
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
-    let profiles = userData.find((e) => e.email === user);
+    let profiles;
+    let team;
+    userData.forEach((channal) => {
+      profiles = channal["members"].find(
+        (validation) => user === validation["email"]
+      );
+      team = channal;
+    });
+    console.log(profiles, team);
     let image = document
       .querySelector(".profile-image")
       .setAttribute("src", profiles.profileLink);
     let userName = document.querySelector(".profile-name");
     userName.innerText = profiles.name;
     let key = document.querySelector(".key");
-    key.innerText = profiles.key;
+    key.innerText = team.channal;
     let names = profiles.name.split(" ");
     document.querySelector(".name-input").value = names[0];
     document.querySelector(".last-name-input").value = names[1];
     document.querySelector(".email").value = profiles.email;
-    document.querySelector(".org-input").value = profiles.organization;
+    document.querySelector(".org-input").value = team.org;
     document.querySelector(".position-input").value = profiles.position;
 
     document.getElementById("save-btn").onclick = () => {
