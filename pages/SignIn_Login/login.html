@@ -69,17 +69,21 @@
       let email = document.querySelector(".email").value.toLowerCase();
       let password = document.querySelector(".password").value;
       let data;
-      userData.forEach((channal) => {
-        data = channal["members"].find(
+      for (let i = 0; i < userData.length; i++) {
+        let valid = userData[i]["members"].find(
           (validation) => email === validation["email"]
         );
-      });
+        if (valid !== undefined) {
+          data = valid;
+        }
+      }
       console.log(userData, data);
       if (email === null && password === null) {
         return alert("Invallid Details");
       } else if (data === undefined) {
         return alert("invalid user or email");
       } else if (data["email"] === email && data["password"] === password) {
+        console.log("pass");
         localStorage.setItem("userEmail", email);
         window.location.href = "../Ticket Page/dashboard.html";
         return alert("success");

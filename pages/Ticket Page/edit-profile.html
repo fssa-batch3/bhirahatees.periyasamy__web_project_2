@@ -105,7 +105,7 @@
     <section class="profile-section">
       <div class="tickets-column container-fluid profile-card">
         <div class="img-container">
-          <img class="profile-image" src="" alt="profile" />
+          <img class="profile-image" id="profile" src="" alt="profile" />
           <div class="profile-name"></div>
         </div>
         <div class="deatils-container">
@@ -152,12 +152,15 @@
     let user = window.localStorage.getItem("userEmail");
     let profiles;
     let team;
-    userData.forEach((channal) => {
-      profiles = channal["members"].find(
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
         (validation) => user === validation["email"]
       );
-      team = channal;
-    });
+      if (valid !== undefined) {
+        team = userData[i];
+        profiles = valid;
+      }
+    }
     console.log(profiles, team);
     let image = document
       .querySelector(".profile-image")
@@ -172,6 +175,10 @@
     document.querySelector(".email").value = profiles.email;
     document.querySelector(".org-input").value = team.org;
     document.querySelector(".position-input").value = profiles.position;
+
+    document.querySelector("#profile").onclick = () => {
+      let source = window.prompt("Upload picture to email");
+    };
 
     document.getElementById("save-btn").onclick = () => {
       let obj = new Object();

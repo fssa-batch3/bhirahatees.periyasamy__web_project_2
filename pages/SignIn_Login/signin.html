@@ -167,12 +167,14 @@
         window.location.href = "./login.html";
       } else {
         let exists;
-        existDatas.forEach(
-          (data) =>
-            (exists = data["members"].find(
-              (validation) => validation["email"] === user["email"]
-            ))
-        );
+        for (let i = 0; i < existDatas.length; i++) {
+          let valid = existDatas[i]["members"].find(
+            (validation) => user["email"] === validation["email"]
+          );
+          if (valid !== undefined) {
+            exists = valid;
+          }
+        }
         if (exists) {
           console.log(exists);
           return alert("Already Exists");
