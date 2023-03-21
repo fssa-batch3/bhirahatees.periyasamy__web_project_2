@@ -68,12 +68,18 @@
       e.preventDefault();
       let email = document.querySelector(".email").value.toLowerCase();
       let password = document.querySelector(".password").value;
-      let data = userData.find((e) => email === e["email"]);
+      let data;
+      userData.forEach((channal) => {
+        data = channal["members"].find(
+          (validation) => email === validation["email"]
+        );
+      });
+      console.log(userData, data);
       if (email === null && password === null) {
         return alert("Invallid Details");
       } else if (data === undefined) {
         return alert("invalid user or email");
-      } else if (email === data.email && password === data.password) {
+      } else if (data["email"] === email && data["password"] === password) {
         localStorage.setItem("userEmail", email);
         window.location.href = "../Ticket Page/dashboard.html";
         return alert("success");

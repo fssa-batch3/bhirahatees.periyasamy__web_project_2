@@ -91,7 +91,10 @@
               >
             </li>
             <li>
-              <a class="dropdown-item log-out" href="../../index.html"
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
                 >Log out</a
               >
             </li>
@@ -142,6 +145,9 @@
     </section>
   </body>
   <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
     let profiles = userData.find((e) => e.email === user);

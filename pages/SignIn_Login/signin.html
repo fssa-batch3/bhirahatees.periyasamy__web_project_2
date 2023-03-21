@@ -136,45 +136,62 @@
       let arr = [];
       let existDatas = JSON.parse(localStorage.getItem("signinData"));
       let validation = false;
-      let data = new Object();
+      let teamData = new Object();
+      let user = new Object();
 
-      data["name"] =
+      teamData["org"] = "Add";
+      user["name"] =
         document.querySelector(".first-name").value.trim() +
         " " +
         document.querySelector(".last-name").value.trim();
-      console.log(name);
-      data.profileLink =
-        "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/89f9adda-0ce2-41ca-bd0a-629c69bba8e5/dapuv77-136f3b3e-66ea-4d43-9bbd-e38008c80c4f.png/v1/fill/w_1024,h_1191,strp/deadpool_png__3_by_anna_x_anarchy_dapuv77-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTE5MSIsInBhdGgiOiJcL2ZcLzg5ZjlhZGRhLTBjZTItNDFjYS1iZDBhLTYyOWM2OWJiYThlNVwvZGFwdXY3Ny0xMzZmM2IzZS02NmVhLTRkNDMtOWJiZC1lMzgwMDhjODBjNGYucG5nIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.TrD-FIdUthi-6Mnxfv0H4QR0Qhp5QJENX2DhEpiZXQ8";
-      data["email"] = document.querySelector(".email").value.toLowerCase();
-      data["key"] = document.querySelector(".key").value.trim();
-      data["password"] = document.querySelector(".password").value.trim();
-      data["organization"] = "Add";
-      data["position"] = "Add";
-      if (document.querySelector(".key").value === null) {
-        data["key"] = crypto.randomUUID();
-      }
-      if (existDatas !== null) {
-        validation = existDatas.find((o) => o["email"] === data["email"]);
-      }
-      if (
-        data.password.trim() !==
-        document.querySelector(".confo-password").value.trim()
-      ) {
-        document.querySelector(".confo-password").style.boxShadow =
-          "inset 0 1px 1px rgb(228, 19, 19), 0 0 8px rgba(236, 8, 8, 0.6)";
-        return alert("Password Not Match");
-      }
-
-      if (validation) {
-        return alert("User Already Exists");
+      user["email"] = document
+        .querySelector(".email")
+        .value.trim()
+        .toLowerCase();
+      user["profileLink"] =
+        "../../assets/images/blank-profile-picture-973460_1280.webp";
+      if (document.querySelector(".key").value == "") {
+        teamData["channal"] = crypto.randomUUID();
+        // console.log(teamData["channal"], crypto.randomUUID());
       } else {
-        if (existDatas !== null) {
-          existDatas.push(data);
-          window.localStorage.setItem("signinData", JSON.stringify(existDatas));
+        teamData["channal"] = document.querySelector(".key").value;
+      }
+      user["password"] = document.querySelector(".password").value.trim();
+      if (existDatas === null) {
+        let members = [];
+        members.push(user);
+        teamData["members"] = members;
+        arr.push(teamData);
+        localStorage.setItem("signinData", JSON.stringify(arr));
+        window.location.href = "./login.html";
+      } else {
+        let exists;
+        existDatas.forEach(
+          (data) =>
+            (exists = data["members"].find(
+              (validation) => validation["email"] === user["email"]
+            ))
+        );
+        if (exists) {
+          console.log(exists);
+          return alert("Already Exists");
+        }
+        let channal = existDatas.find(
+          (org) => org["channal"] === teamData["channal"]
+        );
+        console.log(channal);
+        if (channal) {
+          let index = existDatas.indexOf(channal);
+          channal["members"].push(user);
+          existDatas.splice(index, 1, channal);
+          localStorage.setItem("signinData", JSON.stringify(existDatas));
           window.location.href = "./login.html";
         } else {
-          arr.push(data);
-          window.localStorage.setItem("signinData", JSON.stringify(arr));
+          let members = [];
+          members.push(user);
+          teamData["members"] = members;
+          existDatas.push(teamData);
+          localStorage.setItem("signinData", JSON.stringify(existDatas));
           window.location.href = "./login.html";
         }
       }

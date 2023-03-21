@@ -94,7 +94,10 @@
               >
             </li>
             <li>
-              <a class="dropdown-item log-out" href="../../index.html"
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
                 >Log out</a
               >
             </li>
@@ -148,6 +151,9 @@
     crossorigin="anonymous"
   ></script>
   <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
     var xValues = [1, 2, 3, 4, 5, 6, 7];
     var yValues = [7, 8, 8, 26, 14, 8, 17];
     new Chart("myChart", {
