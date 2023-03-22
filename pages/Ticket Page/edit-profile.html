@@ -91,7 +91,10 @@
               >
             </li>
             <li>
-              <a class="dropdown-item log-out" href="../../index.html"
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
                 >Log out</a
               >
             </li>
@@ -102,7 +105,7 @@
     <section class="profile-section">
       <div class="tickets-column container-fluid profile-card">
         <div class="img-container">
-          <img class="profile-image" src="" alt="profile" />
+          <img class="profile-image" id="profile" src="" alt="profile" />
           <div class="profile-name"></div>
         </div>
         <div class="deatils-container">
@@ -127,11 +130,11 @@
           <div class="container-fluid contain-style">
             <div class="name-container">
               <label class="firstName">Organization : </label>
-              <input class="org-input input-style" type="text" />
+              <input class="org-input" disabled type="text" />
             </div>
             <div class="name-container last-name-container">
               <label class="lastName">Position : </label>
-              <input class="position-input input-style" type="text" />
+              <input class="position-input" type="text" disabled />
             </div>
           </div>
           <div class="button-container">
@@ -142,22 +145,40 @@
     </section>
   </body>
   <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
-    let profiles = userData.find((e) => e.email === user);
+    let profiles;
+    let team;
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
+        (validation) => user === validation["email"]
+      );
+      if (valid !== undefined) {
+        team = userData[i];
+        profiles = valid;
+      }
+    }
+    console.log(profiles, team);
     let image = document
       .querySelector(".profile-image")
       .setAttribute("src", profiles.profileLink);
     let userName = document.querySelector(".profile-name");
     userName.innerText = profiles.name;
     let key = document.querySelector(".key");
-    key.innerText = profiles.key;
+    key.innerText = team.channal;
     let names = profiles.name.split(" ");
     document.querySelector(".name-input").value = names[0];
     document.querySelector(".last-name-input").value = names[1];
     document.querySelector(".email").value = profiles.email;
-    document.querySelector(".org-input").value = profiles.organization;
+    document.querySelector(".org-input").value = team.org;
     document.querySelector(".position-input").value = profiles.position;
+
+    document.querySelector("#profile").onclick = () => {
+      let source = window.prompt("Upload picture to email");
+    };
 
     document.getElementById("save-btn").onclick = () => {
       let obj = new Object();
@@ -166,15 +187,15 @@
         " " +
         document.querySelector(".last-name-input").value;
       obj["email"] = document.querySelector(".email").value.toLowerCase();
-      obj["organization"] = document.querySelector(".org-input").value;
-      obj["position"] = document.querySelector(".position-input").value;
       console.log(obj);
       if (obj["email"] === null) {
         return alert("Please Enter the email");
       } else {
         let localData = Object.assign(profiles, obj);
-        let dataIndex = userData.indexOf(profiles);
-        userData[dataIndex] = localData;
+        let dataIndex = team["members"].indexOf(profiles);
+        let teamIndex = userData.indexOf(team);
+        team["members"][dataIndex] = localData;
+        userData[teamIndex] = team;
         window.localStorage.setItem("signinData", JSON.stringify(userData));
         window.localStorage.setItem("userEmail", obj["email"]);
         alert("success fully updated");

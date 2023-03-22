@@ -92,7 +92,7 @@
               >
             </li>
             <li>
-              <a class="dropdown-item" href="../../index.html">Log out</a>
+              <a class="dropdown-item" onclick="clearData()" href="../../index.html">Log out</a>
             </li>
           </ul>
         </div>
@@ -119,6 +119,9 @@
     crossorigin="anonymous"
   ></script>
   <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
     let profiles = [
       {
         name: "Bhirahatees Periyasamy (You)",
