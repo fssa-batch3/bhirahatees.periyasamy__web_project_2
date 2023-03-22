@@ -187,15 +187,15 @@
         " " +
         document.querySelector(".last-name-input").value;
       obj["email"] = document.querySelector(".email").value.toLowerCase();
-      obj["organization"] = document.querySelector(".org-input").value;
-      obj["position"] = document.querySelector(".position-input").value;
       console.log(obj);
       if (obj["email"] === null) {
         return alert("Please Enter the email");
       } else {
         let localData = Object.assign(profiles, obj);
-        let dataIndex = userData.indexOf(profiles);
-        userData[dataIndex] = localData;
+        let dataIndex = team["members"].indexOf(profiles);
+        let teamIndex = userData.indexOf(team);
+        team["members"][dataIndex] = localData;
+        userData[teamIndex] = team;
         window.localStorage.setItem("signinData", JSON.stringify(userData));
         window.localStorage.setItem("userEmail", obj["email"]);
         alert("success fully updated");

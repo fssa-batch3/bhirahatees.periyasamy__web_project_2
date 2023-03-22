@@ -182,10 +182,15 @@
       window.location.href = "./edit-profile.html";
     };
     document.getElementById("del-btn").onclick = () => {
-      let dataIndex = userData.indexOf(profiles);
-      userData.splice(dataIndex, 1);
-      window.localStorage.setItem("signinData", userData);
+      let teamIndex = userData.indexOf(team);
+      let dataIndex = team["members"].indexOf(profiles);
+      console.log(team["members"][dataIndex], teamIndex, dataIndex);
+      team["members"].splice(dataIndex, 1);
+      userData[teamIndex] = team;
+      alert("success");
+      window.localStorage.setItem("signinData", JSON.stringify(userData));
       window.location.href = "../../index.html";
+      clearData();
     };
   </script>
   <script
