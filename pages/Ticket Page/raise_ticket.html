@@ -116,7 +116,7 @@
             <div class="container-fluid dropdown-ticket">
             <div class="col-md ticketing-status">
             <div class="form-floating">
-               <select class="form-select " id="floatingSelectGrid">
+               <select class="form-select status" id="floatingSelectGrid ">
                     <option class="options" value="1">Assigned</option>
                     <option class="options" value="2">Open</option>
                </select>
@@ -125,7 +125,7 @@
            </div>
             <div class="col-md ticketing-priority">
             <div class="form-floating">
-               <select class="form-select " id="floatingSelectGrid">
+               <select class="form-select priority" id="floatingSelectGrid">
                     <option class="options" value="1">High</option>
                     <option class="options" value="2">Medium</option>
                     <option class="options" value="3">Low</option>
@@ -135,7 +135,7 @@
            </div>
            </div>
             <div class="form-floating">
-             <textarea class="form-control" style="resize: none
+             <textarea class="form-control description" style="resize: none
              ;" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
              <label for="floatingTextarea2">Description</label>
             </div>
@@ -156,6 +156,23 @@
   <script>
     function clearData() {
       localStorage.removeItem("userEmail");
+    }
+    let user = localStorage.getItem("userEmail")
+    document.getElementById("sign-in-btn").onclick = ()=>{
+    let ticketingData = []
+    let ticket = new Object();
+    ticket["mail"] = document.querySelector(".ticket-mail").value;
+    ticket["summary"] = document.querySelector(".ticket-summary").value;
+    let status = document.querySelector(".status").options[document.querySelector(".status").selectedIndex].text;
+    ticket["status"] = status;
+    ticket["id"] = Date.now()
+    let priority = document.querySelector(".priority").options[document.querySelector(".priority").selectedIndex].text;
+    ticket["priority"] = priority;
+    ticket["description"] = document.querySelector(".description");
+
+    ticketingData.push(ticket)
+
+    localStorage.setItem("ticket",JSON.stringify(ticketingData))
     }
   </script>
   <script
