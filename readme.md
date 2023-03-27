@@ -13,4 +13,4 @@ CRUD For User signing page => Create user account [completed] => Read User Data 
 CRUD For Team Creating page => Create team [Completer] => Read User Data For Team [Completed] =>
 Update details in Team [Completed] => Delete Team [Completed]
 
-Ticketing Module Create Ticket [Completed] => List Ticket [Pending] => Reply Ticket [Pending] => close Ticket [Pending]
+Ticketing Module for Ticket Creation => Create Ticket [Completed] => List Ticket [Pending] => Reply Ticket [Pending] => close Ticket [Pending]
