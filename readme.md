@@ -17,7 +17,7 @@ Ticketing Module for Ticket Creation => Create Ticket [Completed] => List Ticket
 
 Ticketing tool
 
-### Create and login account
+### Create account and login account
 
     - Scenario 1: Successfully create an account
     - Steps:
