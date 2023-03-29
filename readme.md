@@ -12,3 +12,24 @@ CRUD For User signing page => Create user account [completed] => Read User Data 
 
 CRUD For Team Creating page => Create team [Completer] => Read User Data For Team [Completed] =>
 Update details in Team [Completed] => Delete Team [Completed]
+
+Ticketing tool
+
+    - Scenario 1: Successfully create an account
+    - Steps:
+         1. Navigate to the registration page.
+         2. Enter the required information such as name, email, password and if you have channal key enter it .
+         3. Click the "Create Account" button.
+    - Expected Result:
+          - The user is redirected to the login page.
+
+### Add product/item to cart
+
+- Scenario 1: Successfully add product/item to cart
+  - Steps:
+    1. Log in as a buyer.
+    2. Navigate to the ticketing page.
+    3. Fill the require information.
+    4. click the create ticket.
+  - Expected Result:
+    - The ticket was successfully created

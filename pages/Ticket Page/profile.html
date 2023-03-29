@@ -169,7 +169,7 @@
       .querySelector(".profile-image")
       .setAttribute("src", profiles.profileLink);
     let userName = document.querySelector(".profile-name");
-    userName.innerText = profiles.name;
+    userName.innerText = profiles.name + " (You)";
     let key = document.querySelector(".key");
     key.innerText = team["channal"];
     let names = profiles.name.split(" ");

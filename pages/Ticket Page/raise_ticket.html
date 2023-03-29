@@ -157,22 +157,49 @@
     function clearData() {
       localStorage.removeItem("userEmail");
     }
-    let user = localStorage.getItem("userEmail")
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+    let user = window.localStorage.getItem("userEmail");
+    let team;
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
+        (validation) => user === validation["email"]
+      );
+      if (valid !== undefined) {
+        team = userData[i];
+      }
+    }
     document.getElementById("sign-in-btn").onclick = ()=>{
     let ticketingData = []
     let ticket = new Object();
-    ticket["mail"] = document.querySelector(".ticket-mail").value;
+    ticket["from"] = user;
+    ticket["to"] = document.querySelector(".ticket-mail").value;
     ticket["summary"] = document.querySelector(".ticket-summary").value;
     let status = document.querySelector(".status").options[document.querySelector(".status").selectedIndex].text;
     ticket["status"] = status;
     ticket["id"] = Date.now()
     let priority = document.querySelector(".priority").options[document.querySelector(".priority").selectedIndex].text;
     ticket["priority"] = priority;
-    ticket["description"] = document.querySelector(".description");
-
+    ticket["description"] = document.querySelector(".description").value;
+    console.log(team)
+    if(team["tickets"] === undefined){
+        team["tickets"] = ticketingData
+    }else{
+      let data = team["tickets"]
+      console.log(team["tickets"])
+      data.push(ticketingData)
+      team["tickets"] = data;
+    }
+    
+    
     ticketingData.push(ticket)
-
-    localStorage.setItem("ticket",JSON.stringify(ticketingData))
+    if(document.querySelector(".ticket-mail").value === ""){
+      ticket["status"] = "Open"
+    }
+      let teamIndex = userData.indexOf(team);
+      userData.splice(teamIndex, 1);
+      userData[teamIndex] = team;
+      alert("success");
+      window.localStorage.setItem("signinData", JSON.stringify(userData));
     }
   </script>
   <script
