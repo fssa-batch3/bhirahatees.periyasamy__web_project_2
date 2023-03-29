@@ -13,6 +13,8 @@ CRUD For User signing page => Create user account [completed] => Read User Data 
 CRUD For Team Creating page => Create team [Completer] => Read User Data For Team [Completed] =>
 Update details in Team [Completed] => Delete Team [Completed]
 
+Ticketing Module for Ticket Creation => Create Ticket [Completed] => List Ticket [Pending] => Reply Ticket [Pending] => close Ticket [Pending]
+
 Ticketing tool
 
     - Scenario 1: Successfully create an account
@@ -23,11 +25,11 @@ Ticketing tool
     - Expected Result:
           - The user is redirected to the login page.
 
-### Add product/item to cart
+### Create Ticket
 
-- Scenario 1: Successfully add product/item to cart
+- Scenario 1: Successfully create a ticket
   - Steps:
-    1. Log in as a buyer.
+    1. Log in to your account.
     2. Navigate to the ticketing page.
     3. Fill the require information.
     4. click the create ticket.
