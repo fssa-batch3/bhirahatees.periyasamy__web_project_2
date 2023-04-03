@@ -78,15 +78,15 @@
         }
       }
       console.log(userData, data);
-      if (email === null && password === null) {
-        return alert("Invallid Details");
-      } else if (data === undefined) {
+      if (data === undefined) {
         return alert("invalid user or email");
       } else if (data["email"] === email && data["password"] === password) {
         console.log("pass");
         localStorage.setItem("userEmail", email);
         window.location.href = "../Ticket Page/dashboard.html";
         return alert("success");
+      } else {
+        return alert("Invalid details");
       }
     });
   </script>

@@ -108,6 +108,10 @@
         <div class="img-container">
           <img class="profile-image" id="profile" src="" alt="profile" />
           <div class="profile-name"></div>
+          <div class="add-remove">
+            <button id="add-pic" class="change-button">Add Profile</button>
+            <button id="del-pic" class="change-button">Delete Profile</button>
+          </div>
         </div>
         <div class="deatils-container">
           <div class="container-fluid key-container">
@@ -176,9 +180,14 @@
     document.querySelector(".email").value = profiles.email;
     document.querySelector(".org-input").value = team.org;
     document.querySelector(".position-input").value = profiles.position;
-
-    document.querySelector("#profile").onclick = () => {
-      let source = window.prompt("Upload picture to email");
+    let source;
+    document.querySelector("#add-pic").onclick = () => {
+      source = window.prompt("Upload picture to email");
+    };
+    document.querySelector("#del-pic").onclick = () => {
+      if (window.confirm("Do want to delete Your profile picture ?")) {
+        source = "../../assets/images/blank-profile-picture-973460_1280.webp";
+      }
     };
 
     document.getElementById("save-btn").onclick = () => {
@@ -188,6 +197,9 @@
         " " +
         document.querySelector(".last-name-input").value;
       obj["email"] = document.querySelector(".email").value.toLowerCase();
+      if (source !== undefined) {
+        obj["profileLink"] = source;
+      }
       console.log(obj);
       if (obj["email"] === null) {
         return alert("Please Enter the email");
