@@ -190,7 +190,7 @@
   box-shadow: 2px 3px 2px rgb(0, 0, 0, 0.3);
 }
 
-.name-heading,
+/* .name-heading,
 .priority-heading,
 .status-heading,
 .subject-heading,
@@ -198,26 +198,51 @@
 .ticket-priority,
 .ticket-status,
 .ticket-issue {
-  flex: 1;
+} */
+.ticket-pic {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  width: 3rem;
+  height: 2.5rem;
 }
-.name-heading,
-.subject-heading,
 .ticket-name {
-  padding-left: 4rem;
+  padding-left: 2rem;
 }
+
 .new-ticket-icon {
   padding-bottom: 0.3rem;
   height: 10rem;
+}
+.subject-container {
+  padding-top: 2rem;
+  display: flex;
+  font-size: 1rem;
+}
+.status-container {
+  display: flex;
+}
+.ticket-subject {
+  font-weight: 500;
+  padding-left: 5rem;
+}
+.ticket-issue {
+  padding-left: 1rem;
+}
+.description {
+  padding: 0.5rem 0rem 1rem 5rem;
 }
 .create-ticket:hover {
   background-color: #f6bc8c;
 }
 .single-ticket-container {
   margin: 0 0.7rem 1rem;
-  display: flex;
+
   justify-content: space-evenly;
   padding: 1.3rem 1rem;
   box-shadow: 2px 3px 2px rgb(0, 0, 0, 0.3);
+}
+.name-profile {
+  display: flex;
 }
 .single-ticket-container:hover {
   box-shadow: 3px 5px 2px rgb(0, 0, 0, 0.4);
@@ -226,8 +251,22 @@
   color: rgb(205, 195, 190);
   font-size: 0.9rem;
 }
+.status {
+  font-weight: bold;
+}
 .ticket-status {
+  padding-left: 1rem;
+}
+.proirity-status {
+  display: flex;
   padding-left: 5rem;
+}
+.proirity-container {
+  display: flex;
+  padding-left: 5rem;
+}
+.proirity {
+  font-weight: bold;
 }
 .ticket-priority {
   margin-left: 1rem;
@@ -236,7 +275,7 @@
 .low-priority {
   margin-top: 0.27rem;
   border-radius: 2rem;
-  margin-left: 1.8rem;
+  margin-left: 0.8rem;
   height: 1.1rem;
   width: 1.1rem;
   background-color: green;
@@ -245,7 +284,7 @@
 .high--priority {
   margin-top: 0.27rem;
   border-radius: 2rem;
-  margin-left: 1.7rem;
+  margin-left: 0.8rem;
   height: 1.1rem;
   width: 1.1rem;
   background-color: red;
@@ -253,7 +292,7 @@
 .medium-priority {
   margin-top: 0.27rem;
   border-radius: 2rem;
-  margin-left: 1.2rem;
+  margin-left: 0.8rem;
   height: 1.1rem;
   width: 1.1rem;
   background-color: rgb(230, 255, 7);
