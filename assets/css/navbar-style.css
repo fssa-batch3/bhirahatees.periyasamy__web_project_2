@@ -43,11 +43,9 @@
   padding: 2rem;
 }
 .tickets-column {
-  background-color: #fffbf9;
-  height: 45rem;
+  height: 55rem;
   width: 90rem;
   border-radius: 0.3rem;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
 #member-list {
   background-color: white;

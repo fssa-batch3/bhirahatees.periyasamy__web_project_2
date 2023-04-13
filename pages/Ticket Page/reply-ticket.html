@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tickets</title>
+    <title>Reply Ticket</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../assets/css/navbar-style.css" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../../assets/css/sign-in.css" />
   </head>
   <body>
     <header>
@@ -103,13 +104,29 @@
     </header>
     <section class="tickets-row">
       <div class="tickets-list"></div>
+      <div class="form-floating">
+        <textarea
+          class="form-control reply-box"
+          style="height: 25rem; resize: none"
+          placeholder="Leave a comment here"
+          id="floatingTextarea2"
+        ></textarea>
+        <button class="reply-button log-btn">Send</button>
+      </div>
     </section>
   </body>
   <script>
+    // getting a value from url parms
+    const url = window.location.search;
+    const urlParms = new URLSearchParams(url);
+    const ticketId = parseInt(urlParms.get("id"));
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
     let profiles;
     let team;
+    let index;
+
+    // geting a data from local storage
     for (let i = 0; i < userData.length; i++) {
       let valid = userData[i]["members"].find(
         (validation) => user === validation["email"]
@@ -117,17 +134,20 @@
       if (valid !== undefined) {
         team = userData[i];
         profiles = valid;
+        index = i;
       }
     }
     function clearData() {
       localStorage.removeItem("userEmail");
     }
+
+    // finding which ticket we show
     let tickets = team["tickets"];
+    let ticketPre = tickets.find((e) => e["id"] === ticketId);
     // console.log(tickets);
+
+    // listing Ticket funtion
     function listTicket(obj, ticket) {
-      let linkedPage = document.createElement("a");
-      linkedPage.setAttribute("href", "./reply-ticket.html?id=" + ticket["id"]);
-      linkedPage.classList.add("redirection");
       let singleContainer = document.createElement("div");
       singleContainer.classList.add("single-ticket-container");
 
@@ -206,16 +226,36 @@
       priorityContainer.append(priority);
       priorityAndStatus.append(priorityContainer);
       singleContainer.append(priorityAndStatus);
-      linkedPage.append(singleContainer);
-      return linkedPage;
+      return singleContainer;
     }
-
+    //  listing the function
     let ticketCol = document.querySelector(".tickets-list");
+    ticketCol.append(listTicket(team, ticketPre));
+    // putting hai message in textarea
+    let raiserDetails = team["members"].find(
+      (e) => ticketPre["from"] === e["email"]
+    );
+    let replyBox = document.querySelector(".reply-box");
+    replyBox.innerText = "Hai, " + raiserDetails["name"] + "\n\n";
 
-    for (let i = 0; i < tickets.length; i++) {
-      // console.log(tickets, team);
-      ticketCol.append(listTicket(team, tickets[i]));
-    }
+    // after clicking the button
+    document.querySelector(".reply-button").onclick = () => {
+      let duplicateDetail = ticketPre;
+      ticketPre["reply"] = document.querySelector(".reply-box").value;
+      let arr = [];
+      if (team["closedTickets"] === undefined) {
+        arr.push(ticketPre);
+        team["closedTickets"] = arr;
+      } else {
+        team["closedTickets"].push(ticketPre);
+      }
+      let ticketIndex = tickets.indexOf(ticketPre);
+      tickets.splice(ticketIndex, 1);
+      userData[index] = team;
+      localStorage.setItem("signinData", JSON.stringify(userData));
+      alert("Ticket Closed Succesfully");
+      window.location.href = "./history.html";
+    };
   </script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
