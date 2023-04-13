@@ -111,7 +111,14 @@
           placeholder="Leave a comment here"
           id="floatingTextarea2"
         ></textarea>
-        <button class="reply-button log-btn">Send</button>
+        <div class="option-send">
+          <select class="posting-opiton">
+            <option class="post-option">Anonymous</option>
+            <option class="post-option">Post With Name</option>
+            <option class="post-option">Don't Post</option>
+          </select>
+          <button class="reply-button log-btn">Send</button>
+        </div>
       </div>
     </section>
   </body>
@@ -242,6 +249,11 @@
     document.querySelector(".reply-button").onclick = () => {
       let duplicateDetail = ticketPre;
       ticketPre["reply"] = document.querySelector(".reply-box").value;
+      ticketPre["reply"] =
+        document.querySelector(".posting-opiton").options[
+          document.querySelector(".posting-opiton").selectedIndex
+        ].text;
+      ticketPre["status"] = "Closed";
       let arr = [];
       if (team["closedTickets"] === undefined) {
         arr.push(ticketPre);

@@ -371,8 +371,15 @@
   text-decoration: none;
   color: black;
 }
+.option-send {
+  margin: 2rem 3rem 1rem 60rem;
+}
+.posting-opiton {
+  width: 12rem;
+  padding: 0.3rem 2.5rem;
+}
 .reply-button {
-  margin: 2rem 3rem 1rem 75rem;
+  margin-left: 2rem;
   border-radius: 0.25rem;
   border: 2px solid #3d008b;
   font-size: 1rem;

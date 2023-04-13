@@ -102,47 +102,118 @@
       </nav>
     </header>
     <section class="tickets-row">
-      <div class="tickets-column">
-        <div class="table-heading">
-          <div class="name-heading">Name</div>
-          <div class="subject-heading">Subject</div>
-          <div class="status-heading">Status</div>
-          <div class="priority-heading">Priority</div>
-          <!-- <button class="create-ticket btn">
-            <img src="../../assets/images/ticket-perforated.svg" alt="new-ticket-icon" class="class"></i>
-            New
-          </button> -->
-        </div>
-        <div class="single-ticket-container">
-          <div class="ticket-name">
-            Gowtham Krishna Sathyamoorthy
-            <div class="ticket-id">#0123345</div>
-          </div>
-          <div class="ticket-issue">I Don't Know anything In DSA</div>
-          <div class="ticket-status">Closed</div>
-          <div class="ticket-priority">
-            High
-            <div class="high--priority"></div>
-          </div>
-        </div>
-        <div class="single-ticket-container">
-          <div class="ticket-name">
-            Mohammad Ajmal
-            <div class="ticket-id">#0123347</div>
-          </div>
-          <div class="ticket-issue">Small confusion In JS</div>
-          <div class="ticket-status">Closed</div>
-          <div class="ticket-priority">
-            Medium
-            <div class="medium-priority"></div>
-          </div>
-        </div>
-      </div>
+      <div class="tickets-list"></div>
     </section>
   </body>
   <script>
     function clearData() {
       localStorage.removeItem("userEmail");
+    }
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+    let user = window.localStorage.getItem("userEmail");
+    let profiles;
+    let team;
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
+        (validation) => user === validation["email"]
+      );
+      if (valid !== undefined) {
+        team = userData[i];
+        profiles = valid;
+      }
+    }
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
+    let tickets = team["closedTickets"];
+    // console.log(tickets);
+    function listTicket(obj, ticket) {
+      let singleContainer = document.createElement("div");
+      singleContainer.classList.add("single-ticket-container");
+
+      let teamMembers = obj["members"];
+      let raiser = teamMembers.find((e) => e["email"] === ticket["from"]);
+      let nameAndProfPic = document.createElement("div");
+      nameAndProfPic.classList.add("name-profile");
+      let profilePic = document.createElement("img");
+      profilePic.setAttribute("src", raiser["profileLink"]);
+      profilePic.classList.add("profile-logo", "ticket-pic");
+      nameAndProfPic.append(profilePic);
+      let raiserName = document.createElement("div");
+      raiserName.classList.add("ticket-name");
+      raiserName.innerText = raiser["name"];
+      let ticketId = document.createElement("div");
+      ticketId.classList.add("ticket-id");
+      ticketId.innerText = "#" + ticket["id"];
+      raiserName.append(ticketId);
+      nameAndProfPic.append(raiserName);
+      singleContainer.append(nameAndProfPic);
+
+      let subjectContainer = document.createElement("div");
+      subjectContainer.classList.add("subject-container");
+      let subjectTitle = document.createElement("div");
+      subjectTitle.classList.add("ticket-subject");
+      subjectTitle.innerText = "Subject :";
+      subjectContainer.append(subjectTitle);
+      let subject = document.createElement("div");
+      subject.classList.add("ticket-issue");
+      subject.innerText = ticket["summary"];
+      subjectContainer.append(subject);
+      singleContainer.append(subjectContainer);
+
+      let lines = ticket["description"].split(",");
+      let description = document.createElement("p");
+      description.classList.add("description");
+      let desc = "";
+      for (let i = 0; i < lines.length; i++) {
+        desc += lines[i] + "\n";
+      }
+      description.innerText = desc;
+      singleContainer.append(description);
+      let priorityAndStatus = document.createElement("div");
+      priorityAndStatus.classList.add("proirity-status");
+
+      let statusContainer = document.createElement("div");
+      statusContainer.classList.add("status-container");
+      let statusTitle = document.createElement("div");
+      statusTitle.classList.add("status");
+      statusTitle.innerText = "Status :";
+      statusContainer.append(statusTitle);
+      let status = document.createElement("div");
+      status.classList.add("ticket-status");
+      status.innerText = ticket["status"];
+      statusContainer.append(status);
+      priorityAndStatus.append(statusContainer);
+
+      let priorityContainer = document.createElement("div");
+      priorityContainer.classList.add("proirity-container");
+      let priorityTitle = document.createElement("div");
+      priorityTitle.classList.add("proirity");
+      priorityTitle.innerText = "Priority :";
+      priorityContainer.append(priorityTitle);
+      let priority = document.createElement("div");
+      priority.classList.add("ticket-priority");
+      priority.innerText = ticket["priority"];
+      let prioritySignal = document.createElement("div");
+      if (ticket["priority"] === "High") {
+        prioritySignal.classList.add("high--priority");
+      } else if (ticket["priority"] === "Medium") {
+        prioritySignal.classList.add("medium-priority");
+      } else {
+        prioritySignal.classList.add("low-priority");
+      }
+      priority.append(prioritySignal);
+      priorityContainer.append(priority);
+      priorityAndStatus.append(priorityContainer);
+      singleContainer.append(priorityAndStatus);
+      return singleContainer;
+    }
+
+    let ticketCol = document.querySelector(".tickets-list");
+
+    for (let i = 0; i < tickets.length; i++) {
+      // console.log(tickets, team);
+      ticketCol.append(listTicket(team, tickets[i]));
     }
   </script>
   <script
