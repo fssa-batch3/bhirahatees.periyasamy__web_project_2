@@ -40,7 +40,7 @@ Ticketing tool
     
     ### Create Ticket
 
-- Scenario 1: Respone to ticket
+- Scenario 2: Respone to ticket
   - Steps:
     1. Log in to your account.
     2. Navigate to the ticketing page.
