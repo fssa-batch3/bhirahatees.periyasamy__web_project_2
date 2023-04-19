@@ -37,3 +37,15 @@ Ticketing tool
     4. click the create ticket.
   - Expected Result:
     - The ticket was successfully created
+    
+    ### Create Ticket
+
+- Scenario 1: Respone to ticket
+  - Steps:
+    1. Log in to your account.
+    2. Navigate to the ticketing page.
+    3. CLick the responsible ticket
+    4. Fill the require information.
+    4. click the Send.
+  - Expected Result:
+    - The ticket was successfully closed.
