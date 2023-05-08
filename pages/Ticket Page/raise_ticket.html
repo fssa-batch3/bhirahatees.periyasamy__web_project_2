@@ -111,6 +111,7 @@
               class="form-control ticket-summary"
               id="floatingInput"
               placeholder="name@example.com"
+              required
             />
             <label for="floatingInput">Summary</label>
             <div class="container-fluid dropdown-ticket">
@@ -125,7 +126,7 @@
            </div>
             <div class="col-md ticketing-priority">
             <div class="form-floating">
-               <select class="form-select priority" id="floatingSelectGrid">
+               <select class="form-select priority" id="floatingSelectGrid">   
                     <option class="options" value="1">High</option>
                     <option class="options" value="2">Medium</option>
                     <option class="options" value="3">Low</option>
@@ -136,7 +137,7 @@
            </div>
             <div class="form-floating">
              <textarea class="form-control description" style="height:25rem;resize: none
-             ;" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+             ;" placeholder="Leave a comment here" id="floatingTextarea2" required></textarea>
              <label for="floatingTextarea2">Description</label>
             </div>
              <div class="log-in-btn container">
@@ -190,6 +191,11 @@
       team["tickets"] = data;
     }
     
+    let receiver = team.find(e=> e["email"] === ticket["to"])
+
+    if(user === receiver || receiver){
+       return alert("Invalid User")
+    }
     
     ticketingData.push(ticket)
     if(document.querySelector(".ticket-mail").value === ""){
@@ -202,6 +208,8 @@
       window.localStorage.setItem("signinData", JSON.stringify(userData));
       window.location.href = "./tickets.html"
     }
+  </script>
+
   </script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
