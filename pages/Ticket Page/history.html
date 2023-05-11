@@ -54,7 +54,7 @@
             </ul>
           </li>
           <li class="nav--items">
-            <a class="nav-link link" href="../Ticket Page/tickets.html"
+            <a class="nav-link link" href="../Ticket Page/history.html"
               >History</a
             >
           </li>
@@ -71,7 +71,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img class="profile-logo" />
+            <img class="profile-logo" alt="profile-pic" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -214,6 +214,7 @@
 
     let ticketCol = document.querySelector(".tickets-list");
 
+    let noDataFind;
     if (tickets !== undefined) {
       for (let i = 0; i < tickets.length; i++) {
         // console.log(tickets, team);
@@ -226,7 +227,15 @@
           ticketCol.append(listTicket(team, tickets[i]));
         }
       }
+      noDataFind = document.getElementsByClassName("single-ticket-container");
     } else {
+      let nodata = document.createElement("img");
+      nodata.classList.add("nodata");
+      nodata.setAttribute("src", "../../assets/images/no_data.jpg");
+      ticketCol.append(nodata);
+    }
+
+    if (noDataFind.length === 0) {
       let nodata = document.createElement("img");
       nodata.classList.add("nodata");
       nodata.setAttribute("src", "../../assets/images/no_data.jpg");
