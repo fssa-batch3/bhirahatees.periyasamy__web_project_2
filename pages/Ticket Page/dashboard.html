@@ -75,7 +75,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img class="profile-logo" alt="profile"/>
+            <img class="profile-logo" alt="profile" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -105,18 +105,18 @@
       <div class="ticket-count container-fluid">
         <div class="total-ticket total">
           <h4 class="tot-ticket tot">Total Tickets</h4>
-          <p class="count">24</p>
+          <p class="count tot-ticket-count">0</p>
         </div>
         <div class="total-ticket">
           <h4 class="tot-ticket close">Ticket Closed</h4>
-          <p class="count">24</p>
+          <p class="count closed-tickets-count">0</p>
         </div>
         <div class="total-ticket high-priority">
           <h4 class="tot-ticket high">
             High Priority<br />
             Tickets
           </h4>
-          <p class="count priority-count">24</p>
+          <p class="count priority-count">0</p>
         </div>
       </div>
       <div class="container-fluid">
@@ -163,6 +163,27 @@
         profiles = valid;
       }
     }
+
+    let closeTickets = document.querySelector(".closed-tickets-count");
+    if (team.closedTickets !== undefined) {
+      closeTickets.innerText = team.closedTickets.length;
+    } else {
+      closeTickets.innerText = 0;
+    }
+
+    let totalTickets = document.querySelector(".tot-ticket-count");
+    let highPriorityTickets = document.querySelector(".priority-count");
+
+    if (team["tickets"] !== undefined) {
+      let highPriorityTicketsCount = team.tickets.filter(
+        (e) => e["priority"] === "High"
+      );
+      let openTickets = team.tickets.filter((e) => e["status"] === "Open");
+      document.querySelector(".open").innerText = openTickets.length;
+      totalTickets.innerText = team["tickets"].length;
+      highPriorityTickets.innerText = highPriorityTicketsCount.length;
+    }
+
     document
       .querySelector(".profile-logo")
       .setAttribute("src", profiles["profileLink"]);

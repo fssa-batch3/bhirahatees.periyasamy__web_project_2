@@ -137,6 +137,7 @@
       let nameAndProfPic = document.createElement("div");
       nameAndProfPic.classList.add("name-profile");
       let profilePic = document.createElement("img");
+      console.log(raiser);
       profilePic.setAttribute("src", raiser["profileLink"]);
       profilePic.classList.add("profile-logo", "ticket-pic");
       nameAndProfPic.append(profilePic);
@@ -212,7 +213,7 @@
     }
     let noDataFind;
     let ticketCol = document.querySelector(".tickets-list");
-    if (tickets[0] !== undefined) {
+    if (tickets !== undefined) {
       for (let i = 0; i < tickets.length; i++) {
         if (tickets[i]["status"] === "open" || tickets[i]["to"] === user) {
           ticketCol.append(listTicket(team, tickets[i]));
