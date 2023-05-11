@@ -385,3 +385,19 @@
   font-size: 1rem;
   color: white;
 }
+.teamCode {
+  color: #3d008b;
+  cursor: pointer;
+}
+.data-btn {
+  padding-left: 1rem;
+}
+
+.nodata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 35rem;
+  width: 40rem;
+}

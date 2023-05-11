@@ -71,11 +71,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
-            />
+            <img class="profile-logo" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -122,6 +118,11 @@
     function clearData() {
       localStorage.removeItem("userEmail");
     }
+    console.log(profiles);
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
+
     let tickets = team["tickets"];
     // console.log(tickets);
     function listTicket(obj, ticket) {
@@ -211,12 +212,20 @@
     }
 
     let ticketCol = document.querySelector(".tickets-list");
-
-    for (let i = 0; i < tickets.length; i++) {
-      // console.log(tickets, team);
-      ticketCol.append(listTicket(team, tickets[i]));
+    if (tickets[0] !== undefined) {
+      for (let i = 0; i < tickets.length; i++) {
+        if (tickets[i]["status"] === "open" || tickets[i]["to"] === user) {
+          ticketCol.append(listTicket(team, tickets[i]));
+        }
+      }
+    } else {
+      let nodata = document.createElement("img");
+      nodata.classList.add("nodata");
+      nodata.setAttribute("src", "../../assets/images/no_data.jpg");
+      ticketCol.append(nodata);
     }
   </script>
+
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

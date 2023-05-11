@@ -37,7 +37,7 @@
     <section class="login-section">
       <!-- create card using bootstrap -->
       <div class="login-card">
-        <form>
+        <form id="form">
           <div class="form-floating mb-3 input">
             <input
               type="email"
@@ -57,7 +57,9 @@
             <label for="floatingPassword">Password</label>
           </div>
           <a class="for-pass" href="#">Forgot Password ?</a>
-          <button id="login-btn" class="btn login-btn">Log in</button>
+          <button type="submit" id="login-btn" class="btn login-btn">
+            Log in
+          </button>
         </form>
       </div>
     </section>
@@ -65,7 +67,7 @@
   <script>
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
 
-    document.getElementById("login-btn").addEventListener("click", (e) => {
+    document.getElementById("form").addEventListener("submit", (e) => {
       e.preventDefault();
       let email = document.querySelector(".email").value.toLowerCase();
       let password = document.querySelector(".password").value;

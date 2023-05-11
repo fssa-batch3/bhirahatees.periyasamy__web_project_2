@@ -73,11 +73,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
-            />
+            <img class="profile-logo" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -164,6 +160,9 @@
         profiles = valid;
       }
     }
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
     console.log(profiles, team);
     let image = document
       .querySelector(".profile-image")

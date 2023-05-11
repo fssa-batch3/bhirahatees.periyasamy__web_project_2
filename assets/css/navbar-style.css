@@ -38,6 +38,7 @@
 .profile-logo {
   height: 2rem;
   width: 2rem;
+  border-radius: 2rem;
 }
 .tickets-row {
   padding: 2rem;
@@ -57,4 +58,7 @@
   height: 43rem;
   margin-left: 7rem;
   margin-top: 3rem;
+}
+.image-upload > input {
+  display: none;
 }

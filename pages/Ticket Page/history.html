@@ -71,11 +71,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
-            />
+            <img class="profile-logo" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -122,6 +118,9 @@
         profiles = valid;
       }
     }
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
     function clearData() {
       localStorage.removeItem("userEmail");
     }
@@ -141,7 +140,11 @@
       nameAndProfPic.append(profilePic);
       let raiserName = document.createElement("div");
       raiserName.classList.add("ticket-name");
-      raiserName.innerText = raiser["name"];
+      if (ticket["reply-as"] === "Anonymous") {
+        raiserName.innerText = ticket["reply-as"];
+      } else {
+        raiserName.innerText = raiser["name"];
+      }
       let ticketId = document.createElement("div");
       ticketId.classList.add("ticket-id");
       ticketId.innerText = "#" + ticket["id"];
@@ -211,9 +214,23 @@
 
     let ticketCol = document.querySelector(".tickets-list");
 
-    for (let i = 0; i < tickets.length; i++) {
-      // console.log(tickets, team);
-      ticketCol.append(listTicket(team, tickets[i]));
+    if (tickets !== undefined) {
+      for (let i = 0; i < tickets.length; i++) {
+        // console.log(tickets, team);
+        if (tickets[i]["reply-as"] === "Anonymous") {
+          ticketCol.append(listTicket(team, tickets[i]));
+        } else if (
+          tickets[i]["reply-as"] === "Post With Name" ||
+          tickets[i]["from"] === user
+        ) {
+          ticketCol.append(listTicket(team, tickets[i]));
+        }
+      }
+    } else {
+      let nodata = document.createElement("img");
+      nodata.classList.add("nodata");
+      nodata.setAttribute("src", "../../assets/images/no_data.jpg");
+      ticketCol.append(nodata);
     }
   </script>
   <script

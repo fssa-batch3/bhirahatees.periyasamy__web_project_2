@@ -1,3 +1,6 @@
+body {
+  overflow: hidden;
+}
 .profile-card {
   margin: 3rem 0rem 0rem 2rem;
   display: flex;
@@ -8,6 +11,7 @@
 .profile-image {
   border: 1px solid rgba(0, 0, 0, 0.3);
   height: 20rem;
+  width: 18rem;
 }
 .profile-name {
   padding: 1rem;

@@ -75,8 +75,7 @@
           >
             <img
               class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
+             
             />
           </a>
 
@@ -403,7 +402,7 @@
         profiles = valid;
       }
     }
-
+   document.querySelector(".profile-logo").setAttribute("src",profiles["profileLink"])
     function createCard(userName, userPosition, link, gmail) {
       // container
       let container = document.createElement("div");

@@ -41,15 +41,16 @@
       <!-- creating a card using bootstrap -->
       <div class="create-heading"><h3>Create Your Workspace</h3></div>
       <div class="container-fluid">
-        <form class="sign-in-card" action="">
+        <form class="sign-in-card" id = "form">
           <div class="container-fluid">
             <div class="form-floating mb-3 name input">
               <input
                 type="text"
                 class="form-control first-name text"
                 id="floatingInput"
-                pattern="^[A-Za-z]{1,20}$"
+                pattern="^[A-Za-z]{0,16}"
                 placeholder="Steve"
+                title="It not contains number"
                 required
               />
               <label for="floatingInput">First Name</label>
@@ -60,6 +61,7 @@
                 class="form-control text last-name"
                 pattern="^[a-zA-Z]{1,20}$"
                 id="floatingInput"
+                title="It not contains number"
                 placeholder="Rogers"
                 required
               />
@@ -84,11 +86,14 @@
                 type="text"
                 class="form-control key"
                 id="floatingInput"
-                pattern="^[a-zA-Z-]{1,30}"
                 placeholder="name@example.com"
-                required
+        
               />
-              <label for="floatingInput">Sharing Key (optional)</label>
+              <label for="floatingInput">Team Code (optional)</label>
+              <span class="ticket-id team-code">
+                What is <u><span class="teamCode">Team Code</span></u
+                >&nbsp?
+              </span>
             </div>
           </div>
           <div class="sign-in-pass container-fluid">
@@ -117,10 +122,9 @@
           </div>
           <div class="log-in-btn container">
             <button
-              type="button"
+              type="submit"
               id="sign-in-btn"
-              class="btn btn-primary log-btn"
-            >
+              class="btn btn-primary log-btn">
               Sign In
             </button>
           </div>
@@ -132,10 +136,40 @@
       </div>
       <a href="../Ticket Page/dashboard.html"></a>
     </section>
+    <dialog id="showImg">
+      <div class="data-contain">
+        <p class="teamcode-data">
+          <div class="data-btn">
+          If Your team mate already Created a team.In Their Profile Page there
+          is one key mention as a Channal.that's
+          Called Team Code.
+        </p>
+        
+        </div>
+        <div>
+          <img
+            src="../../assets/images/Screenshot (50).png"
+            class="dialog"
+            alt=""
+          />
+        </div>
+        <button id="closeImg">Close</button>
+      </div>
+    </dialog>
   </body>
   <script></script>
   <script>
-    document.getElementById("sign-in-btn").addEventListener("click", (e) => {
+    document.querySelector(".teamCode").onclick = () => {
+      document.getElementById("showImg").showModal();
+    };
+    document.getElementById("closeImg").onclick = () => {
+      document.getElementById("showImg").close();
+    };
+ 
+    let form =   document.querySelector("#form")
+    console.log(form)
+  form.addEventListener("submit", (e) => {
+      e.preventDefault()
       let arr = [];
       let existDatas = JSON.parse(localStorage.getItem("signinData"));
       let validation = false;
@@ -154,7 +188,7 @@
         .toLowerCase();
       user["profileLink"] =
         "../../assets/images/blank-profile-picture-973460_1280.webp";
-      if (document.querySelector(".key").value == "") {
+      if (document.querySelector(".key").value == "" ||document.querySelector(".key").value.includes(" ") ) {
         teamData["channal"] = crypto.randomUUID();
         // console.log(teamData["channal"], crypto.randomUUID());
       } else {

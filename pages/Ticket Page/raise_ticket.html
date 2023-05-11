@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="../../assets/css/navbar-style.css" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
-    <link rel="stylesheet" href="../../assets/css/sign-in.css">
+    <link rel="stylesheet" href="../../assets/css/sign-in.css" />
     <link rel="stylesheet" href="../../assets/css/dashboard.css" />
     <link rel="stylesheet" href="../../assets/css/new-ticket.css" />
   </head>
@@ -61,7 +61,9 @@
             >
           </li>
           <li class="nav--items">
-            <a class="nav-link link" href="../Ticket Page/members.html">Members</a>
+            <a class="nav-link link" href="../Ticket Page/members.html"
+              >Members</a
+            >
           </li>
         </ul>
         <div class="dropdown profile-setting">
@@ -71,11 +73,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
-            />
+            <img class="profile-logo" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -89,13 +87,20 @@
                 >Edit Profile</a
               >
             </li>
-            <li><a class="dropdown-item log-out" onclick="clearData()" href="../../index.html">Log out</a></li>
+            <li>
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
+                >Log out</a
+              >
+            </li>
           </ul>
         </div>
       </nav>
     </header>
     <section class="tickets-row">
-      
+      <form id="ticket-raise">
         <div class="tickets-column raise-email new-ticket">
           <div class="form-floating mb-3">
             <input
@@ -106,60 +111,78 @@
             />
             <label for="floatingInput">Email address</label>
             <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control ticket-summary"
-              id="floatingInput"
-              placeholder="name@example.com"
-              required
-            />
-            <label for="floatingInput">Summary</label>
-            <div class="container-fluid dropdown-ticket">
-            <div class="col-md ticketing-status">
-            <div class="form-floating">
-               <select class="form-select status" id="floatingSelectGrid ">
-                    <option class="options" value="1">Assigned</option>
-                    <option class="options" value="2">Open</option>
-               </select>
-              <label for="floatingSelectGrid">Status</label>
-             </div>
-           </div>
-            <div class="col-md ticketing-priority">
-            <div class="form-floating">
-               <select class="form-select priority" id="floatingSelectGrid">   
-                    <option class="options" value="1">High</option>
-                    <option class="options" value="2">Medium</option>
-                    <option class="options" value="3">Low</option>
-               </select>
-              <label for="floatingSelectGrid">Priority</label>
-             </div>
-           </div>
-           </div>
-            <div class="form-floating">
-             <textarea class="form-control description" style="height:25rem;resize: none
-             ;" placeholder="Leave a comment here" id="floatingTextarea2" required></textarea>
-             <label for="floatingTextarea2">Description</label>
+              <input
+                type="text"
+                class="form-control ticket-summary"
+                id="floatingInput"
+                placeholder="name@example.com"
+                required
+              />
+              <label for="floatingInput">Summary</label>
+              <div class="container-fluid dropdown-ticket">
+                <div class="col-md ticketing-status">
+                  <div class="form-floating">
+                    <select class="form-select status" id="floatingSelectGrid ">
+                      <option class="options" value="1">Assigned</option>
+                      <option class="options" value="2">Open</option>
+                    </select>
+                    <label for="floatingSelectGrid">Status</label>
+                  </div>
+                </div>
+                <div class="col-md ticketing-priority">
+                  <div class="form-floating">
+                    <select
+                      class="form-select priority"
+                      id="floatingSelectGrid"
+                    >
+                      <option class="options" value="1">High</option>
+                      <option class="options" value="2">Medium</option>
+                      <option class="options" value="3">Low</option>
+                    </select>
+                    <label for="floatingSelectGrid">Priority</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-floating">
+                <textarea
+                  class="form-control description"
+                  style="height: 25rem; resize: none"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea2"
+                  required
+                ></textarea>
+                <label for="floatingTextarea2">Description</label>
+              </div>
+              <div class="log-in-btn container">
+                <button
+                  type="button"
+                  id="sign-in-btn"
+                  class="btn btn-primary log-btn"
+                >
+                  Create Ticket
+                </button>
+              </div>
             </div>
-             <div class="log-in-btn container">
-            <button
-              type="button"
-              id="sign-in-btn"
-              class="btn btn-primary log-btn"
-            >
-              Create Ticket
-            </button>
-          </div>
           </div>
         </div>
       </form>
     </section>
   </body>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    integrity=""
+  ></script>
+  <script type="text/javascript">
+    emailjs.init("d9wckKRJ95SJFTxaz");
+  </script>
   <script>
     function clearData() {
       localStorage.removeItem("userEmail");
     }
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
+    let profiles;
     let team;
     for (let i = 0; i < userData.length; i++) {
       let valid = userData[i]["members"].find(
@@ -167,50 +190,70 @@
       );
       if (valid !== undefined) {
         team = userData[i];
+        profiles = valid;
       }
     }
-    document.getElementById("sign-in-btn").onclick = ()=>{
-    let ticketingData = []
-    let ticket = new Object();
-    ticket["from"] = user;
-    ticket["to"] = document.querySelector(".ticket-mail").value;
-    ticket["summary"] = document.querySelector(".ticket-summary").value;
-    let status = document.querySelector(".status").options[document.querySelector(".status").selectedIndex].text;
-    ticket["status"] = status;
-    ticket["id"] = Date.now()
-    let priority = document.querySelector(".priority").options[document.querySelector(".priority").selectedIndex].text;
-    ticket["priority"] = priority;
-    ticket["description"] = document.querySelector(".description").value;
-    console.log(team)
-    if(team["tickets"] === undefined){
-        team["tickets"] = ticketingData
-    }else{
-      let data = team["tickets"]
-      console.log(team["tickets"])
-      data.push(ticket)
-      team["tickets"] = data;
-    }
-    
-    let receiver = team.find(e=> e["email"] === ticket["to"])
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
+    document.getElementById("sign-in-btn").onclick = () => {
+      let ticketingData = [];
+      let ticket = new Object();
+      ticket["from"] = user;
+      ticket["to"] = document.querySelector(".ticket-mail").value.toLowerCase();
+      ticket["summary"] = document.querySelector(".ticket-summary").value;
+      let status =
+        document.querySelector(".status").options[
+          document.querySelector(".status").selectedIndex
+        ].text;
+      ticket["status"] = status;
+      ticket["id"] = Date.now();
+      let priority =
+        document.querySelector(".priority").options[
+          document.querySelector(".priority").selectedIndex
+        ].text;
+      ticket["priority"] = priority;
+      ticket["description"] = document.querySelector(".description").value;
+      console.log(team);
+      if (team["tickets"] === undefined) {
+        team["tickets"] = ticketingData;
+      } else {
+        let data = team["tickets"];
+        data.push(ticket);
+        team["tickets"] = data;
+      }
 
-    if(user === receiver || receiver){
-       return alert("Invalid User")
-    }
-    
-    ticketingData.push(ticket)
-    if(document.querySelector(".ticket-mail").value === ""){
-      ticket["status"] = "Open"
-    }
+      let receiver = team["members"].find((e) => e["email"] === ticket["to"]);
+
+      if (document.querySelector(".ticket-mail").value === "") {
+        ticket["status"] = "Open";
+      }
+      if (receiver === undefined) {
+        //  console.log(receiver)
+        return alert("There is no user in our team");
+      }
+      if (receiver["email"] === user) {
+        return alert("Invalid User");
+      }
+      emailjs.send("service_rsem3gc", "template_nlgg9m5", {
+        ticket_number: "#" + ticket["id"],
+        user_name: profiles["name"],
+        ticket_description: ticket["description"],
+        to: ticket["from"],
+        summary: ticket["summary"],
+      });
+
+      ticketingData.push(ticket);
+
       let teamIndex = userData.indexOf(team);
       userData.splice(teamIndex, 1);
       userData[teamIndex] = team;
       alert("success");
       window.localStorage.setItem("signinData", JSON.stringify(userData));
-      window.location.href = "./tickets.html"
-    }
+      window.location.href = "./tickets.html";
+    };
   </script>
 
-  </script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
