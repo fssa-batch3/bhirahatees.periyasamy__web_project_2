@@ -73,10 +73,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              class="profile-logo"
-             alt="profile"
-            />
+            <img class="profile-logo" alt="profile" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -106,7 +103,7 @@
       <div class="tickets-column" id="member-list">
         <div class="table-heading member-heading">
           <div class="name-heading">Name</div>
-          <div class="subject-heading">Position</div>
+          <div class="subject-heading">Designation</div>
           <div class="status-heading">Email</div>
         </div>
       </div>
@@ -402,11 +399,13 @@
         profiles = valid;
       }
     }
-   document.querySelector(".profile-logo").setAttribute("src",profiles["profileLink"])
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
     function createCard(userName, userPosition, link, gmail) {
       // container
       let container = document.createElement("div");
-      container.classList.add("single-ticket-container");
+      container.classList.add("user-info");
 
       // image containg div
       let profile = document.createElement("div");

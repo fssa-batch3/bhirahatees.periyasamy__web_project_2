@@ -141,11 +141,11 @@
 
 .sub-text-container {
   width: 10rem;
-  padding: 3rem 3rem 3rem 8rem;
+  padding: 3rem 3rem 3rem 2rem;
   margin: 0;
 }
 .get-started-container {
-  padding: left 2rem;
+  padding-left: 2rem;
   padding-top: 5.7rem;
 }
 .sub-text-container {
@@ -186,7 +186,7 @@
   display: flex;
   font-size: 1.3rem;
   padding: 1.3rem 1rem;
-  justify-content: space-evenly;
+  justify-content: space-around;
   box-shadow: 2px 3px 2px rgb(0, 0, 0, 0.3);
 }
 
@@ -400,4 +400,15 @@
   margin: auto;
   height: 35rem;
   width: 40rem;
+}
+
+.user-info {
+  display: flex;
+  height: 7rem;
+  padding-left: 8rem;
+  padding-top: 3rem;
+}
+
+.user-info:hover {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 }
