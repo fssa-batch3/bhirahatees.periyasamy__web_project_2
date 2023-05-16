@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="../../assets/css/dashboard.css" />
     <link rel="stylesheet" href="../../assets/css/new-ticket.css" />
   </head>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
   <body>
     <header>
       <!-- using symantic tags -->
@@ -101,6 +106,14 @@
     </header>
     <section class="tickets-row">
       <div class="tickets-column" id="member-list">
+        <div class="form-group mb-4 search-box-container">
+          <input
+            id="exampleFormControlInput2x search-box"
+            type="email"
+            placeholder="What're you searching for?"
+            class="form-control form-control-underlined border-primary search-box"
+          />
+        </div>
         <div class="table-heading member-heading">
           <div class="name-heading">Name</div>
           <div class="subject-heading">Designation</div>
@@ -447,5 +460,27 @@
         team["members"][i]["email"]
       );
     }
+  </script>
+  <script>
+    function filterEmails(searchTerm) {
+      const memberCards = document.querySelectorAll(".user-info");
+
+      for (let i = 0; i < memberCards.length; i++) {
+        const email = memberCards[i]
+          .querySelector(".profile-name")
+          .querySelector(".member-name")
+          .innerText.toLowerCase();
+        if (email.includes(searchTerm)) {
+          memberCards[i].classList.remove("hidden");
+        } else {
+          memberCards[i].classList.add("hidden");
+        }
+      }
+    }
+    const searchInput = document.querySelector(".search-box");
+    searchInput.addEventListener("input", function () {
+      const searchTerm = searchInput.value.toLowerCase();
+      filterEmails(searchTerm);
+    });
   </script>
 </html>

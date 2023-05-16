@@ -208,8 +208,21 @@
       priorityContainer.append(priority);
       priorityAndStatus.append(priorityContainer);
       singleContainer.append(priorityAndStatus);
-      linkedPage.append(singleContainer);
-      return linkedPage;
+      let buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("respond-or-decline");
+      let respondButton = document.createElement("button");
+      respondButton.innerText = "Respond ✅";
+      respondButton.classList.add("respond");
+      respondButton.classList.add("btn-common");
+      linkedPage.append(respondButton);
+      buttonContainer.append(linkedPage);
+      let declineButton = document.createElement("button");
+      declineButton.classList.add("decline");
+      declineButton.classList.add("btn-common");
+      declineButton.innerHTML = "Decline ❎";
+      buttonContainer.append(declineButton);
+      singleContainer.append(buttonContainer);
+      return singleContainer;
     }
     let noDataFind;
     let ticketCol = document.querySelector(".tickets-list");

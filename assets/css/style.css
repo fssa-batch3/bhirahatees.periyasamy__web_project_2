@@ -239,14 +239,12 @@
 
   justify-content: space-evenly;
   padding: 1.3rem 1rem;
-  box-shadow: 2px 3px 2px rgb(0, 0, 0, 0.3);
+  border-bottom: 2px solid var(--nav-bar);
 }
 .name-profile {
   display: flex;
 }
-.single-ticket-container:hover {
-  box-shadow: 3px 5px 2px rgb(0, 0, 0, 0.4);
-}
+
 .ticket-id {
   color: rgb(205, 195, 190);
   font-size: 0.9rem;
@@ -410,5 +408,45 @@
 }
 
 .user-info:hover {
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid var(--nav-bar);
+}
+
+#search-box {
+  width: 10rem;
+}
+
+.respond-or-decline {
+  padding: 2rem;
+  display: flex;
+}
+
+.respond {
+  background-color: green;
+  color: white;
+  padding: 2rem 1rem;
+  border: 2px solid green;
+  border-radius: 0.3rem;
+}
+
+.respond:hover {
+  background-color: white;
+  color: green;
+}
+
+.decline {
+  background-color: red;
+  color: white;
+  padding: 2rem 1rem;
+  border: 2px solid red;
+  border-radius: 0.3rem;
+}
+
+.decline:hover {
+  background-color: white;
+  color: red;
+}
+
+.btn-common {
+  margin-left: 2.8rem;
+  padding: 0.3rem;
 }

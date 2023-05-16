@@ -213,14 +213,15 @@
           }
         }
         if (exists) {
-          console.log(exists);
           return alert("Already Exists");
         }
         let channal = existDatas.find(
           (org) => org["channal"] === teamData["channal"]
-        );
-        console.log(channal);
-        if (channal) {
+        ); 
+
+      
+
+       if (channal) {
           let index = existDatas.indexOf(channal);
           channal["members"].push(user);
           existDatas.splice(index, 1, channal);
