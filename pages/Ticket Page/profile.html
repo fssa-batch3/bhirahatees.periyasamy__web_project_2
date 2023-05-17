@@ -73,7 +73,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img class="profile-logo"alt="profile"/>
+            <img class="profile-logo" alt="profile" />
           </a>
 
           <ul class="dropdown-menu profile-drop">
@@ -149,6 +149,9 @@
     let sharingKey = crypto.randomUUID();
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
     let profiles;
     let team;
     for (let i = 0; i < userData.length; i++) {

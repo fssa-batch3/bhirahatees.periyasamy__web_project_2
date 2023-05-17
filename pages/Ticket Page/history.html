@@ -118,6 +118,10 @@
         profiles = valid;
       }
     }
+
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
     document
       .querySelector(".profile-logo")
       .setAttribute("src", profiles["profileLink"]);
@@ -221,7 +225,7 @@
         ticket["id"]
       ).toLocaleDateString()} ${new Date(ticket["id"]).toLocaleTimeString()}`;
       timeAndDateContainer.append(date);
-      
+
       return singleContainer;
     }
 

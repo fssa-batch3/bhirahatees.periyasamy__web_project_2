@@ -9,6 +9,10 @@ function clearData() {
 let userData = JSON.parse(window.localStorage.getItem("signinData"));
 let user = window.localStorage.getItem("userEmail");
 
+if (user === null) {
+  window.location.href = "../SignIn_login/login.html";
+}
+
 let profiles;
 let team;
 for (let i = 0; i < userData.length; i++) {

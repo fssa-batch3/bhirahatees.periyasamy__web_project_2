@@ -412,6 +412,11 @@
         profiles = valid;
       }
     }
+
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
+    
     document
       .querySelector(".profile-logo")
       .setAttribute("src", profiles["profileLink"]);

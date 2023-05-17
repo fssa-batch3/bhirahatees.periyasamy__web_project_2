@@ -164,6 +164,10 @@
       }
     }
 
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
+
     let closeTickets = document.querySelector(".closed-tickets-count");
     if (team.closedTickets !== undefined) {
       closeTickets.innerText = team.closedTickets.length;
