@@ -152,12 +152,10 @@
     // console.log(tickets);
 
     // listing Ticket funtion
-    function listTicket(obj, ticket) {
+    let raiser = team["members"].find((e) => e["email"] === ticketPre["from"]);
+    function listTicket(raiser, ticket) {
       let singleContainer = document.createElement("div");
       singleContainer.classList.add("single-ticket-container");
-
-      let teamMembers = obj["members"];
-      let raiser = teamMembers.find((e) => e["email"] === ticket["from"]);
       let nameAndProfPic = document.createElement("div");
       nameAndProfPic.classList.add("name-profile");
       let profilePic = document.createElement("img");
@@ -193,6 +191,8 @@
       for (let i = 0; i < lines.length; i++) {
         desc += lines[i] + "\n";
       }
+
+      
       description.innerText = desc;
       singleContainer.append(description);
       let priorityAndStatus = document.createElement("div");
@@ -235,7 +235,9 @@
     }
     //  listing the function
     let ticketCol = document.querySelector(".tickets-list");
-    ticketCol.append(listTicket(team, ticketPre));
+    ticketCol.append(listTicket(raiser, ticketPre));
+    ticketCol.append(listTicket(profiles));
+
     // putting hai message in textarea
     let raiserDetails = team["members"].find(
       (e) => ticketPre["from"] === e["email"]

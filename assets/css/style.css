@@ -450,3 +450,9 @@
   margin-left: 2.8rem;
   padding: 0.3rem;
 }
+
+.time-date {
+  color: rgb(205, 195, 190);
+  font-size: 0.7rem;
+  padding: 1rem 5rem 0rem 5rem;
+}

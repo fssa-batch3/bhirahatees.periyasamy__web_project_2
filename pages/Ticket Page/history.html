@@ -188,6 +188,8 @@
       statusContainer.append(status);
       priorityAndStatus.append(statusContainer);
 
+      console.log(new Date(ticket["id"]).toLocaleTimeString());
+
       let priorityContainer = document.createElement("div");
       priorityContainer.classList.add("proirity-container");
       let priorityTitle = document.createElement("div");
@@ -209,6 +211,17 @@
       priorityContainer.append(priority);
       priorityAndStatus.append(priorityContainer);
       singleContainer.append(priorityAndStatus);
+
+      let timeAndDateContainer = document.createElement("div");
+      timeAndDateContainer.classList.add("time-date");
+      singleContainer.append(timeAndDateContainer);
+      let date = document.createElement("p");
+      date.classList.add("create-date");
+      date.innerText = `Created On ${new Date(
+        ticket["id"]
+      ).toLocaleDateString()} ${new Date(ticket["id"]).toLocaleTimeString()}`;
+      timeAndDateContainer.append(date);
+      
       return singleContainer;
     }
 

@@ -222,6 +222,17 @@
       declineButton.innerHTML = "Decline ❎";
       buttonContainer.append(declineButton);
       singleContainer.append(buttonContainer);
+
+      let timeAndDateContainer = document.createElement("div");
+      timeAndDateContainer.classList.add("time-date");
+      singleContainer.append(timeAndDateContainer);
+      let date = document.createElement("p");
+      date.classList.add("create-date");
+      date.innerText = `Created On ${new Date(
+        ticket["id"]
+      ).toLocaleDateString()} ${new Date(ticket["id"]).toLocaleTimeString()}`;
+      timeAndDateContainer.append(date);
+
       return singleContainer;
     }
     let noDataFind;
