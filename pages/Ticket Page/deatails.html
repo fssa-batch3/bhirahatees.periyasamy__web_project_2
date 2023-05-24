@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reply Ticket</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../assets/css/navbar-style.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" />
+    <link rel="stylesheet" href="../../assets/css/sign-in.css" />
+  </head>
+  <body>
+    <header>
+      <!-- using symantic tags -->
+      <nav class="navbar container-fluid sticky-top header">
+        <!-- navbar -->
+        <div class="container nav-container">
+          <a class="navbar-brand nav-href nav-" href="./dashboard.html">
+            <!-- <img class="logo" src="#" alt="#" /> -->
+            Pupdesk
+          </a>
+        </div>
+        <ul class="nav-bar">
+          <li class="nav--items">
+            <a class="nav-link link" href="./dashboard.html">Dashboard</a>
+          </li>
+          <li class="nav--items">
+            <a
+              class="nav-link link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Tickets
+            </a>
+            <ul class="dropdown-menu drop">
+              <li>
+                <a class="dropdown-item" href="../Ticket Page/tickets.html"
+                  >Tickets List</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="../Ticket Page/raise_ticket.html"
+                  >Raise Ticket</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav--items">
+            <a class="nav-link link" href="../Ticket Page/history.html"
+              >History</a
+            >
+          </li>
+          <li class="nav--items">
+            <a class="nav-link link" href="../Ticket Page/members.html"
+              >Members</a
+            >
+          </li>
+        </ul>
+        <div class="dropdown profile-setting">
+          <a
+            class="btn dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img class="profile-logo" alt="profile" />
+          </a>
+
+          <ul class="dropdown-menu profile-drop">
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
+                >Log out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <section class="tickets-row">
+      <div class="tickets-list"></div>
+      <div id="comments-list"></div>
+      <div id="comment-form" class="option-send">
+        <div class="form-floating">
+          <textarea
+            class="form-control reply-box comment-input"
+            style="height: 7.5rem; resize: none"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+          ></textarea>
+          <label for="floatingTextarea2">Comment</label>
+          <button
+            type="button"
+            style="margin-left: 10rem; margin-top: 1rem"
+            class="reply-button log-btn"
+          >
+            Post
+          </button>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="../../assets/js/details.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+    crossorigin="anonymous"
+  ></script>
+</html>

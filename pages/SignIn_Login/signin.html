@@ -51,6 +51,7 @@
                 pattern="^[A-Za-z]{0,16}"
                 placeholder="Steve"
                 title="It not contains number"
+                value="Bhirahatees"
                 required
               />
               <label for="floatingInput">First Name</label>
@@ -62,6 +63,7 @@
                 pattern="^[a-zA-Z]{1,20}$"
                 id="floatingInput"
                 title="It not contains number"
+                value="Periyasamy"
                 placeholder="Rogers"
                 required
               />
@@ -74,6 +76,7 @@
                 type="email"
                 class="form-control email"
                 id="floatingInput"
+                value="bhirahatees.periyasamy@outlook.com"
                 placeholder="name@example.com"
                 required
               />
@@ -86,6 +89,7 @@
                 type="text"
                 class="form-control key"
                 id="floatingInput"
+                value="2b591325-b822-4bd9-9cd6-aa37583022b7"
                 placeholder="name@example.com"
         
               />
@@ -104,6 +108,7 @@
                 id="floatingPassword password"
                 pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                 placeholder="Password"
+                value="Varan@123"
                 required
               />
               <label for="floatingPassword">Password</label>
@@ -115,6 +120,7 @@
                 id="floatingPassword"
                 placeholder="Password"
                 title="Password Contains One Uppercase and One symbol and Numbers"
+                value="Varan@123"
                 required
               />
               <label for="floatingPassword">Confirm Password</label>
@@ -157,7 +163,7 @@
       </div>
     </dialog>
   </body>
-  <script ></script>
+  <script></script>
   <script>
     document.querySelector(".teamCode").onclick = () => {
       document.getElementById("showImg").showModal();
@@ -189,11 +195,12 @@
       user["profileLink"] =
         "../../assets/images/blank-profile-picture-973460_1280.webp";
       if (document.querySelector(".key").value == "" ||document.querySelector(".key").value.includes(" ") ) {
-        teamData["channal"] = crypto.randomUUID();
+        teamData["channal"] = Math.random().toString(36).substring(7);nchrome
         // console.log(teamData["channal"], crypto.randomUUID());
       } else {
         teamData["channal"] = document.querySelector(".key").value;
       }
+      console.log(teamData["channal"])
       user["password"] = document.querySelector(".password").value.trim();
       if (existDatas === null) {
         let members = [];

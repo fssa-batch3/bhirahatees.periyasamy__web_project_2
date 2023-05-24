@@ -125,7 +125,7 @@
     const ticketId = parseInt(urlParms.get("id"));
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
     let user = window.localStorage.getItem("userEmail");
-        if (user === null) {
+    if (user === null) {
       window.location.href = "../SignIn_login/login.html";
     }
     let profiles;
@@ -170,6 +170,7 @@
       raiserName.innerText = raiser["name"];
       let ticketId = document.createElement("div");
       ticketId.classList.add("ticket-id");
+      console.log(ticket);
       ticketId.innerText = "#" + ticket["id"];
       raiserName.append(ticketId);
       nameAndProfPic.append(raiserName);
@@ -195,7 +196,6 @@
         desc += lines[i] + "\n";
       }
 
-      
       description.innerText = desc;
       singleContainer.append(description);
       let priorityAndStatus = document.createElement("div");
@@ -239,7 +239,6 @@
     //  listing the function
     let ticketCol = document.querySelector(".tickets-list");
     ticketCol.append(listTicket(raiser, ticketPre));
-    ticketCol.append(listTicket(profiles));
 
     // putting hai message in textarea
     let raiserDetails = team["members"].find(
@@ -256,6 +255,7 @@
         document.querySelector(".posting-opiton").options[
           document.querySelector(".posting-opiton").selectedIndex
         ].text;
+      ticketPre["closeTime"] = Date.now();
       ticketPre["status"] = "Closed";
       let arr = [];
       if (team["closedTickets"] === undefined) {

@@ -456,3 +456,37 @@
   font-size: 0.7rem;
   padding: 1rem 5rem 0rem 5rem;
 }
+
+.redirection {
+  text-decoration: none;
+}
+.comment-name-pic {
+  display: flex;
+  padding: 1rem;
+}
+.comment-name {
+  padding-top: 0.7rem;
+  padding-left: 1rem;
+}
+
+.comment {
+  border-radius: 0.4rem;
+  background-color: rgba(237, 184, 249, 0.3);
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.comment-desc {
+  padding-left: 5rem;
+  padding-bottom: 2rem;
+}
+
+.del-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+}
+
+.option-container {
+  padding-left: 2rem;
+}

@@ -131,6 +131,9 @@
     let tickets = team["closedTickets"];
     // console.log(tickets);
     function listTicket(obj, ticket) {
+      let linkedPage = document.createElement("a");
+      linkedPage.setAttribute("href", "./deatails.html?id=" + ticket["id"]);
+      linkedPage.classList.add("redirection");
       let singleContainer = document.createElement("div");
       singleContainer.classList.add("single-ticket-container");
 
@@ -192,7 +195,7 @@
       statusContainer.append(status);
       priorityAndStatus.append(statusContainer);
 
-      console.log(new Date(ticket["id"]).toLocaleTimeString());
+      // console.log(new Date(ticket["id"]).toLocaleTimeString());
 
       let priorityContainer = document.createElement("div");
       priorityContainer.classList.add("proirity-container");
@@ -221,26 +224,35 @@
       singleContainer.append(timeAndDateContainer);
       let date = document.createElement("p");
       date.classList.add("create-date");
-      date.innerText = `Created On ${new Date(
-        ticket["id"]
-      ).toLocaleDateString()} ${new Date(ticket["id"]).toLocaleTimeString()}`;
+      date.innerText =
+        `Created On  ${new Date(ticket["id"]).toLocaleDateString()}  ${new Date(
+          ticket["id"]
+        ).toLocaleTimeString()}` +
+        "'\n\n" +
+        `Closed On  ${new Date(
+          ticket["closeTime"]
+        ).toLocaleDateString()}  ${new Date(
+          ticket["closeTime"]
+        ).toLocaleTimeString()}`;
       timeAndDateContainer.append(date);
-
-      return singleContainer;
+      linkedPage.append(singleContainer);
+      return linkedPage;
     }
 
     let ticketCol = document.querySelector(".tickets-list");
 
     let noDataFind;
     if (tickets !== undefined) {
-      for (let i = 0; i < tickets.length; i++) {
-        // console.log(tickets, team);
+      for (let i = tickets.length - 1; i > -1; i--) {
+        console.log(tickets[i]);
         if (tickets[i]["reply-as"] === "Anonymous") {
           ticketCol.append(listTicket(team, tickets[i]));
         } else if (
           tickets[i]["reply-as"] === "Post With Name" ||
           tickets[i]["from"] === user
         ) {
+          ticketCol.append(listTicket(team, tickets[i]));
+        } else {
           ticketCol.append(listTicket(team, tickets[i]));
         }
       }
