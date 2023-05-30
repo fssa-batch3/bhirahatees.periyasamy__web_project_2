@@ -98,20 +98,12 @@
       </nav>
     </header>
     <section class="tickets-row">
-      <div class="filter">
-        <select id="priorityFilter">
-          <option value="All">All</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
       <div class="tickets-list"></div>
     </section>
   </body>
   <script>
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
-    let user = window.localStorage.getItem("userEmail");
+    let user = JSON.parse(window.localStorage.getItem("userEmail"));
     if (user === null) {
       window.location.href = "../SignIn_login/login.html";
     }

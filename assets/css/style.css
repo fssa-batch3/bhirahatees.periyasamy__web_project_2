@@ -490,3 +490,22 @@
 .option-container {
   padding-left: 2rem;
 }
+
+.important {
+  color: red;
+}
+.roles-org-containers {
+  padding: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.org-input,
+.roles-input {
+  width: 30rem;
+}
+.roles-input {
+  height: 10rem;
+}

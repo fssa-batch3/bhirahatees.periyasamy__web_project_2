@@ -89,7 +89,7 @@
                 type="text"
                 class="form-control key"
                 id="floatingInput"
-                value="2b591325-b822-4bd9-9cd6-aa37583022b7"
+                value="lD9QT"
                 placeholder="name@example.com"
         
               />
@@ -181,9 +181,6 @@
       let validation = false;
       let teamData = new Object();
       let user = new Object();
-
-      teamData["org"] = "Add";
-      user["position"] = "Add";
       user["name"] =
         document.querySelector(".first-name").value.trim() +
         " " +
@@ -195,7 +192,7 @@
       user["profileLink"] =
         "../../assets/images/blank-profile-picture-973460_1280.webp";
       if (document.querySelector(".key").value == "" ||document.querySelector(".key").value.includes(" ") ) {
-        teamData["channal"] = Math.random().toString(36).substring(7);nchrome
+        teamData["channal"] = Math.random().toString(36).substring(7);
         // console.log(teamData["channal"], crypto.randomUUID());
       } else {
         teamData["channal"] = document.querySelector(".key").value;
@@ -208,7 +205,8 @@
         teamData["members"] = members;
         arr.push(teamData);
         localStorage.setItem("signinData", JSON.stringify(arr));
-        window.location.href = "./login.html";
+        localStorage.setItem("userEmail", JSON.stringify(user["email"]));
+        window.location.href = "./rolesAndOrgName.html?channal=" + teamData["channal"];
       } else {
         let exists;
         for (let i = 0; i < existDatas.length; i++) {
@@ -233,14 +231,16 @@
           channal["members"].push(user);
           existDatas.splice(index, 1, channal);
           localStorage.setItem("signinData", JSON.stringify(existDatas));
-          window.location.href = "./login.html";
+          localStorage.setItem("userEmail", JSON.stringify(user["email"]));
+          window.location.href = "./rolesAndOrgName.html?channal=" + teamData["channal"];
         } else {
           let members = [];
           members.push(user);
           teamData["members"] = members;
           existDatas.push(teamData);
           localStorage.setItem("signinData", JSON.stringify(existDatas));
-          window.location.href = "./login.html";
+          localStorage.setItem("userEmail", JSON.stringify(user["email"]));
+          window.location.href = "./rolesAndOrgName.html?channal="+ teamData["channal"];
         }
       }
     });
