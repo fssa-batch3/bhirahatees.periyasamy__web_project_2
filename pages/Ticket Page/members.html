@@ -138,7 +138,7 @@
     }
 
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
-    let user = JSON.parse(window.localStorage.getItem("userEmail"));
+    let user = window.localStorage.getItem("userEmail")
     let profiles;
     let team;
     for (let i = 0; i < userData.length; i++) {

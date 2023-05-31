@@ -151,25 +151,27 @@
       localStorage.removeItem("userEmail");
     }
     let userData = JSON.parse(window.localStorage.getItem("signinData"));
-    let user = JSON.parse(window.localStorage.getItem("userEmail"));
+    let user = window.localStorage.getItem("userEmail");
+
     let profiles;
     let team;
     for (let i = 0; i < userData.length; i++) {
       let valid = userData[i]["members"].find(
         (validation) => user === validation["email"]
       );
+      console.log(valid);
       if (valid !== undefined) {
         team = userData[i];
         profiles = valid;
       }
     }
 
-    console.log(team, profiles["jask"]);
+    console.log(user, profiles);
 
     if (user === null) {
       window.location.href = "../SignIn_login/login.html";
     }
-
+    console.log(team);
     let closeTickets = document.querySelector(".closed-tickets-count");
     if (team.closedTickets !== undefined) {
       closeTickets.innerText = team.closedTickets.length;

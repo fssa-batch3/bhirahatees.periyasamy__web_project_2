@@ -7,7 +7,7 @@ function clearData() {
 // it helps to get a data from local storage
 
 let userData = JSON.parse(window.localStorage.getItem("signinData"));
-let user = JSON.parse(window.localStorage.getItem("userEmail"));
+let user = window.localStorage.getItem("userEmail");
 
 if (user === null) {
   window.location.href = "../SignIn_login/login.html";

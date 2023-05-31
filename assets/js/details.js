@@ -4,7 +4,7 @@ const urlParms = new URLSearchParams(url);
 const ticketId = parseInt(urlParms.get("id"));
 const commentData = JSON.parse(localStorage.getItem("comment"));
 let userData = JSON.parse(window.localStorage.getItem("signinData"));
-let user = JSON.parse(window.localStorage.getItem("userEmail"));
+let user = window.localStorage.getItem("userEmail")
 if (user === null) {
   window.location.href = "../SignIn_login/login.html";
 }
