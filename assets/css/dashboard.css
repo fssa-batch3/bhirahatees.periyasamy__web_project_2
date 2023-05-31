@@ -73,3 +73,11 @@
 .graph:hover {
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
 }
+#add-pic,
+#del-pic {
+  padding: 0rem 1rem;
+  flex: 0.5;
+}
+.add-remove {
+  display: flex;
+}

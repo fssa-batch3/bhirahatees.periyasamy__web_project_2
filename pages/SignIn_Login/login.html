@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Log In - Untitled</title>
+    <title>Log In - Pupdesk</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -28,7 +28,8 @@
         <!-- navbar -->
         <div class="container">
           <a class="navbar-brand" href="../../index.html">
-            <img class="logo" src="#" alt="#" />
+            <!-- <img class="logo" src="#" alt="#" /> -->
+            Pupdesk
           </a>
         </div>
       </nav>
@@ -36,35 +37,62 @@
     <section class="login-section">
       <!-- create card using bootstrap -->
       <div class="login-card">
-        <form>
+        <form id="form">
           <div class="form-floating mb-3 input">
             <input
               type="email"
               class="form-control email"
-              id="floatingInput"
+              id="floatingInput user-email"
               placeholder="name@example.com"
+              value="bhirahatees.periyasamy@fssa.freshworks.com"
             />
             <label for="floatingInput">Email address</label>
           </div>
           <div class="form-floating">
             <input
               type="password"
-              class="form-control"
-              id="floatingPassword"
+              class="form-control password"
+              id="floatingPassword user-password"
               placeholder="Password"
+              value="Varan@123"
             />
             <label for="floatingPassword">Password</label>
           </div>
           <a class="for-pass" href="#">Forgot Password ?</a>
-          <button id="login-btn" class="btn login-btn">Log in</button>
+          <button type="submit" id="login-btn" class="btn login-btn">
+            Log in
+          </button>
         </form>
       </div>
     </section>
   </body>
   <script>
-    document.getElementById("login-btn").addEventListener("click", (e) => {
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+
+    document.getElementById("form").addEventListener("submit", (e) => {
       e.preventDefault();
-      window.location.href = "../Ticket Page/dashboard.html";
+      let email = document.querySelector(".email").value.toLowerCase();
+      let password = document.querySelector(".password").value;
+      let data;
+      for (let i = 0; i < userData.length; i++) {
+        let valid = userData[i]["members"].find(
+          (validation) => email === validation["email"]
+        );
+        if (valid !== undefined) {
+          data = valid;
+        }
+      }
+      console.log(userData, data);
+      if (data === undefined) {
+        return alert("invalid user or email");
+      } else if (data["email"] === email && data["password"] === password) {
+        console.log("pass");
+        localStorage.setItem("userEmail", email);
+        window.location.href = "../Ticket Page/dashboard.html";
+        return alert("success");
+      } else {
+        return alert("Invalid details");
+      }
     });
   </script>
 </html>

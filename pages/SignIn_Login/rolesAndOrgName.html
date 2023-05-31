@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roles And Organizations</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/sign-in.css" /></head
+    <link rel="stylesheet" href="../../assets/css/dashboard.css" /></head
+    <link rel="stylesheet" href="../../assets/css/navbar-style.css" /></head
+    <link rel="stylesheet" href="../../assets/css/profile.css" /></head
+  ><style>
+    input:valid {
+      box-shadow: inset 0 1px 1px rgb(0, 255, 0), 0 0 8px rgba(7, 188, 46, 0.6);
+    }
+
+    input:invalid {
+      box-shadow: inset 0 1px 1px rgb(228, 19, 19), 0 0 8px rgba(236, 8, 8, 0.6);
+    }
+  </style>
+  <body>
+    <header>
+      <!-- using symantic tags -->
+      <nav class="navbar header">
+        <!-- navbar -->
+        <div class="container">
+          <a class="navbar-brand" href="../../index.html">
+            <!-- <img class="logo" src="#" alt="#" /> -->
+            Pupdesk
+          </a>
+        </div>
+      </nav>
+    </header>
+    <section class="roles-org-containers">
+      <div class="org-name-conateiner">
+        <form id="form" action="">
+          <div class="form-floating mb-3 name input">
+            <input
+              type="text"
+              class="form-control org-input"
+              id="floatingInput"
+              placeholder="Steve"
+              title="It not contains number"
+              value="Skyhigh"
+              required
+            />
+            <label for="floatingInput"
+              >Organization Name <span class="important">*</span></label
+            >
+          </div>
+          <div class="roles-container">
+            <div class="form-floating mb-3 name input">
+              <textarea
+                type="text"
+                class="form-control roles-input"
+                id="floatingInput"
+                placeholder="Steve"
+                title="It not contains number"
+                style="height: 10rem; resize: none"
+                required
+          >Squad Lead,Teacher,Monitor,Adviser,Techie</textarea> 
+              <label for="floatingInput"
+                >Roles In your team <span class="important">*</span></label
+              >
+              <p>Enter your roles as CSV format</p>
+            </div>
+            <div class="role-container">
+               <div class="form-floating mb-3 name input">
+             <input
+              type="text"
+              class="form-control role-input"
+              id="floatingInput"
+              placeholder="Steve"
+              title="It not contains number"
+              value="Techie"
+              required
+            />
+            <label for="floatingInput"
+              >Your Role<span class="important">*</span></label
+            >
+            </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary log-btn">Submit</button>
+        </form>
+      </div>
+    </section>
+  </body>
+  <script>
+    let orgName = document.querySelector(".org-input").value;
+    let roles = document.querySelector(".roles-input").value;
+    let userTeams = JSON.parse(localStorage.getItem("signinData"))
+    let user = JSON.parse(localStorage.getItem("userEmail"))
+    const url = window.location.search;
+    const urlParms = new URLSearchParams(url);
+    const channal = urlParms.get("channal")
+    let team = userTeams.find(e=> e["channal"] === channal)
+    if(team["roles"] !== null && team["org"] !== null){
+      document.querySelector(".org-input").disabled = true;
+      document.querySelector(".roles-input").disabled = true;
+    }
+    document.getElementById("form").addEventListener("submit",(e)=>{
+      e.preventDefault()
+      if(!roles.includes(document.querySelector(".role-input").value)){
+         return alert("Team Lead Didn't include this role")
+      }
+      
+      for(let i = 0; i < team["members"].length;i++){
+        console.log(team["members"][i],user)
+        if(team["members"][i]["email"] === user){
+          team["members"][i]["position"] =  document.querySelector(".role-input").value;
+          console.log(team["members"][i])
+        }
+      }
+      let index = userTeams.indexOf(team)
+      let role = roles.split(",")
+      team["org"] = orgName;
+      team["roles"] = role;
+      userTeams[index] =  team
+      localStorage.setItem("signinData",JSON.stringify(userTeams))
+      window.location.href = "../Ticket Page/dashboard.html"
+    })
+  </script>
+</html>

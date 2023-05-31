@@ -1,4 +1,8 @@
 /* navbar styles */
+/* .nav--bar {
+  backdrop-filter: blur(20px);
+} */
+
 .nav-bar {
   list-style: none;
   flex: 4;
@@ -39,11 +43,9 @@
   padding: 2rem;
 }
 .tickets-column {
-  background-color: #fffbf9;
-  height: 45rem;
+  height: 55rem;
   width: 90rem;
   border-radius: 0.3rem;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
 #member-list {
   background-color: white;
@@ -55,4 +57,7 @@
   height: 43rem;
   margin-left: 7rem;
   margin-top: 3rem;
+}
+.image-upload > input {
+  display: none;
 }

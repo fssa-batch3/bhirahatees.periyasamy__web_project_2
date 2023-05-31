@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Edit Profile</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -102,100 +102,64 @@
     <section class="profile-section">
       <div class="tickets-column container-fluid profile-card">
         <div class="img-container">
-          <img class="profile-image" src="" alt="profile" />
+          <img class="profile-image" id="profile" src="" alt="profile" />
           <div class="profile-name"></div>
+          <div class="add-remove">
+            <div class="image-upload">
+              <label for="file-input" id="add-pic" class="change-button">
+                Add Profile
+              </label>
+              <input id="file-input" type="file" />
+            </div>
+            <button id="del-pic" class="change-button">Delete Profile</button>
+          </div>
         </div>
         <div class="deatils-container">
-          <div class="container-fluid key-container">
-            <div class="keyholder">Channel :</div>
-            <div class="key"></div>
-          </div>
-          <div class="container-fluid contain-style">
-            <div class="name-container">
-              <label class="firstName">First Name : </label>
-              <input class="name-input input-style" type="text" disabled />
+          <form id="form">
+            <div class="container-fluid key-container">
+              <div class="keyholder">Channel :</div>
+              <div class="key"></div>
             </div>
-            <div class="name-container last-name-container">
-              <label class="lastName">Last Name : </label>
-              <input class="last-name-input input-style" type="text" disabled />
+            <div class="container-fluid contain-style">
+              <div class="name-container">
+                <label class="firstName">First Name : </label>
+                <input class="name-input input-style" type="text" required />
+              </div>
+              <div class="name-container last-name-container">
+                <label class="lastName">Last Name : </label>
+                <input
+                  class="last-name-input input-style"
+                  type="text"
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <div class="container contain-style key-container">
-            <label class="keyholder">Email :</label>
-            <input class="email input-style" disabled />
-          </div>
-          <div class="container-fluid contain-style">
-            <div class="name-container">
-              <label class="firstName">Organization : </label>
-              <input class="org-input input-style" type="text" disabled />
+            <div class="container contain-style key-container">
+              <label class="keyholder">Email :</label>
+              <input class="email input-style" required />
             </div>
-            <div class="name-container last-name-container">
-              <label class="lastName">Position : </label>
-              <input class="position-input input-style" type="text" disabled />
+            <div class="container-fluid contain-style">
+              <div class="name-container">
+                <label class="firstName">Organization : </label>
+                <input class="org-input" disabled type="text" />
+              </div>
+              <div class="name-container last-name-container">
+                <label class="lastName">Position : </label>
+                <input class="position-input" type="text" disabled />
+              </div>
             </div>
-          </div>
-          <div class="button-container">
-            <button class="change-button" id="change-btn">Edit</button>
-            <button class="delete-button" id="del-btn">Delete</button>
-          </div>
+            <div class="button-container">
+              <button type="submit" class="change-button" id="save-btn">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
   </body>
-  <script>
-    function clearData() {
-      localStorage.removeItem("userEmail");
-    }
-    let sharingKey = crypto.randomUUID();
-    let userData = JSON.parse(window.localStorage.getItem("signinData"));
-    let user = window.localStorage.getItem("userEmail")
-    if (user === null) {
-      window.location.href = "../SignIn_login/login.html";
-    }
-    let profiles;
-    let team;
-    for (let i = 0; i < userData.length; i++) {
-      let valid = userData[i]["members"].find(
-        (validation) => user === validation["email"]
-      );
-      if (valid !== undefined) {
-        team = userData[i];
-        profiles = valid;
-      }
-    }
-    console.log(team);
-    document
-      .querySelector(".profile-logo")
-      .setAttribute("src", profiles["profileLink"]);
-    console.log(profiles, team);
-    let image = document
-      .querySelector(".profile-image")
-      .setAttribute("src", profiles.profileLink);
-    let userName = document.querySelector(".profile-name");
-    userName.innerText = profiles.name + " (You)";
-    let key = document.querySelector(".key");
-    key.innerText = team["channal"];
-    let names = profiles.name.split(" ");
-    document.querySelector(".name-input").value = names[0];
-    document.querySelector(".last-name-input").value = names[1];
-    document.querySelector(".email").value = profiles.email;
-    document.querySelector(".org-input").value = team.org;
-    document.querySelector(".position-input").value = profiles.position;
-    document.getElementById("change-btn").onclick = () => {
-      window.location.href = "./edit-profile.html";
-    };
-    document.getElementById("del-btn").onclick = () => {
-      let teamIndex = userData.indexOf(team);
-      let dataIndex = team["members"].indexOf(profiles);
-      console.log(team["members"][dataIndex], teamIndex, dataIndex);
-      team["members"].splice(dataIndex, 1);
-      userData[teamIndex] = team;
-      alert("success");
-      window.localStorage.setItem("signinData", JSON.stringify(userData));
-      window.location.href = "../../index.html";
-      clearData();
-    };
-  </script>
+  <script src="../../assets/js/edit-profile.js"></script>
+  <script></script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"

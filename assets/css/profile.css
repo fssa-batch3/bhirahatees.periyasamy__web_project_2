@@ -1,3 +1,6 @@
+body {
+  overflow: hidden;
+}
 .profile-card {
   margin: 3rem 0rem 0rem 2rem;
   display: flex;
@@ -8,6 +11,7 @@
 .profile-image {
   border: 1px solid rgba(0, 0, 0, 0.3);
   height: 20rem;
+  width: 18rem;
 }
 .profile-name {
   padding: 1rem;
@@ -17,6 +21,7 @@
 .deatils-container {
   padding-top: 3.5rem;
 }
+
 .key-container {
   font-size: 1.2rem;
   padding: 5rem 0rem 0.5rem 8rem;
@@ -43,8 +48,14 @@
   font-size: 1.2rem;
 }
 .input-style {
-  background-color: #fffaf6;
-  border: 2px solid #fffaf6;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.org-input,
+.position-input {
+  background-color: #fffbf9;
+  border: #fffbf9;
 }
 .contain-style {
   padding-top: 2rem;
@@ -65,6 +76,7 @@
 }
 .last-name-input,
 .postion-input {
+  width: 15rem;
   flex: 1;
 }
 .email {
@@ -96,4 +108,8 @@ label {
 .change-button:hover,
 .delete-button:hover {
   opacity: 0.7;
+}
+
+.input-style:focus {
+  outline-color: 2px solid #ffff25;
 }

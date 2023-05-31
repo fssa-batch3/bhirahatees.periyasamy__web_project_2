@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign - In | Host</title>
+    <title>Sign - In</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -30,7 +30,8 @@
         <!-- navbar -->
         <div class="container">
           <a class="navbar-brand" href="../../index.html">
-            <img class="logo" src="#" alt="#" />
+            <!-- <img class="logo" src="#" alt="#" /> -->
+            Pupdesk
           </a>
         </div>
       </nav>
@@ -40,15 +41,17 @@
       <!-- creating a card using bootstrap -->
       <div class="create-heading"><h3>Create Your Workspace</h3></div>
       <div class="container-fluid">
-        <form class="sign-in-card" action="">
+        <form class="sign-in-card" id = "form">
           <div class="container-fluid">
             <div class="form-floating mb-3 name input">
               <input
                 type="text"
                 class="form-control first-name text"
                 id="floatingInput"
-                pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"
+                pattern="^[A-Za-z]{0,16}"
                 placeholder="Steve"
+                title="It not contains number"
+                value="Bhirahatees"
                 required
               />
               <label for="floatingInput">First Name</label>
@@ -57,8 +60,10 @@
               <input
                 type="text"
                 class="form-control text last-name"
-                pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"
+                pattern="^[a-zA-Z]{1,20}$"
                 id="floatingInput"
+                title="It not contains number"
+                value="Periyasamy"
                 placeholder="Rogers"
                 required
               />
@@ -71,6 +76,7 @@
                 type="email"
                 class="form-control email"
                 id="floatingInput"
+                value="bhirahatees.periyasamy@fssa.freshworks.com"
                 placeholder="name@example.com"
                 required
               />
@@ -83,10 +89,15 @@
                 type="text"
                 class="form-control key"
                 id="floatingInput"
+                value="lD9QT"
                 placeholder="name@example.com"
-                required
+        
               />
-              <label for="floatingInput">Sharing Key (optional)</label>
+              <label for="floatingInput">Team Code (optional)</label>
+              <span class="ticket-id team-code">
+                What is <u><span class="teamCode">Team Code</span></u
+                >&nbsp?
+              </span>
             </div>
           </div>
           <div class="sign-in-pass container-fluid">
@@ -97,6 +108,7 @@
                 id="floatingPassword password"
                 pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
                 placeholder="Password"
+                value="Varan@123"
                 required
               />
               <label for="floatingPassword">Password</label>
@@ -107,6 +119,8 @@
                 class="form-control text confo-password"
                 id="floatingPassword"
                 placeholder="Password"
+                title="Password Contains One Uppercase and One symbol and Numbers"
+                value="Varan@123"
                 required
               />
               <label for="floatingPassword">Confirm Password</label>
@@ -114,10 +128,9 @@
           </div>
           <div class="log-in-btn container">
             <button
-              type="button"
+              type="submit"
               id="sign-in-btn"
-              class="btn btn-primary log-btn"
-            >
+              class="btn btn-primary log-btn">
               Sign In
             </button>
           </div>
@@ -129,46 +142,105 @@
       </div>
       <a href="../Ticket Page/dashboard.html"></a>
     </section>
+    <dialog id="showImg">
+      <div class="data-contain">
+        <p class="teamcode-data">
+          <div class="data-btn">
+          If Your team mate already Created a team.In Their Profile Page there
+          is one key mention as a Channal.that's
+          Called Team Code.
+        </p>
+        
+        </div>
+        <div>
+          <img
+            src="../../assets/images/Screenshot (50).png"
+            class="dialog"
+            alt=""
+          />
+        </div>
+        <button id="closeImg">Close</button>
+      </div>
+    </dialog>
   </body>
   <script></script>
   <script>
-    document.getElementById("sign-in-btn").addEventListener("click", (e) => {
+    document.querySelector(".teamCode").onclick = () => {
+      document.getElementById("showImg").showModal();
+    };
+    document.getElementById("closeImg").onclick = () => {
+      document.getElementById("showImg").close();
+    };
+ 
+    let form =   document.querySelector("#form")
+    console.log(form)
+  form.addEventListener("submit", (e) => {
+      e.preventDefault()
       let arr = [];
       let existDatas = JSON.parse(localStorage.getItem("signinData"));
       let validation = false;
-      let data = new Object();
-
-      data["name"] =
+      let teamData = new Object();
+      let user = new Object();
+      user["name"] =
         document.querySelector(".first-name").value.trim() +
         " " +
         document.querySelector(".last-name").value.trim();
-      console.log(name);
-      data["email"] = document.querySelector(".email").value.toLowerCase();
-      data["key"] = document.querySelector(".key").value.trim();
-      data["password"] = document.querySelector(".password").value.trim();
-      if (existDatas !== null) {
-        validation = existDatas.find((o) => o["email"] === data["email"]);
-      }
-      if (
-        data.password.trim() !==
-        document.querySelector(".confo-password").value.trim()
-      ) {
-        document.querySelector(".confo-password").style.boxShadow =
-          "inset 0 1px 1px rgb(228, 19, 19), 0 0 8px rgba(236, 8, 8, 0.6)";
-        return alert("Password Not Match");
-      }
-
-      if (validation) {
-        return alert("User Already Exists");
+      user["email"] = document
+        .querySelector(".email")
+        .value.trim()
+        .toLowerCase();
+      user["profileLink"] =
+        "../../assets/images/blank-profile-picture-973460_1280.webp";
+      if (document.querySelector(".key").value == "" ||document.querySelector(".key").value.includes(" ") ) {
+        teamData["channal"] = Math.random().toString(36).substring(7);
+        // console.log(teamData["channal"], crypto.randomUUID());
       } else {
-        if (existDatas !== null) {
-          existDatas.push(data);
+        teamData["channal"] = document.querySelector(".key").value;
+      }
+      console.log(teamData["channal"])
+      user["password"] = document.querySelector(".password").value.trim();
+      if (existDatas === null) {
+        let members = [];
+        members.push(user);
+        teamData["members"] = members;
+        arr.push(teamData);
+        localStorage.setItem("signinData", JSON.stringify(arr));
+        localStorage.setItem("userEmail", JSON.stringify(user["email"]));
+        window.location.href = "./rolesAndOrgName.html?channal=" + teamData["channal"];
+      } else {
+        let exists;
+        for (let i = 0; i < existDatas.length; i++) {
+          let valid = existDatas[i]["members"].find(
+            (validation) => user["email"] === validation["email"]
+          );
+          if (valid !== undefined) {
+            exists = valid;
+          }
+        }
+        if (exists) {
+          return alert("Already Exists");
+        }
+        let channal = existDatas.find(
+          (org) => org["channal"] === teamData["channal"]
+        ); 
+
+      
+
+       if (channal) {
+          let index = existDatas.indexOf(channal);
+          channal["members"].push(user);
+          existDatas.splice(index, 1, channal);
           localStorage.setItem("signinData", JSON.stringify(existDatas));
-          window.location.href = "./login.html";
+          localStorage.setItem("userEmail", JSON.stringify(user["email"]));
+          window.location.href = "./rolesAndOrgName.html?channal=" + teamData["channal"];
         } else {
-          arr.push(data);
-          localStorage.setItem("signinData", JSON.stringify(arr));
-          window.location.href = "./login.html";
+          let members = [];
+          members.push(user);
+          teamData["members"] = members;
+          existDatas.push(teamData);
+          localStorage.setItem("signinData", JSON.stringify(existDatas));
+          localStorage.setItem("userEmail", JSON.stringify(user["email"]));
+          window.location.href = "./rolesAndOrgName.html?channal="+ teamData["channal"];
         }
       }
     });

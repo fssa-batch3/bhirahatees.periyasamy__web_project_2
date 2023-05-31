@@ -38,3 +38,23 @@
   color: var(--nav-bar);
   border: 0.1rem solid var(--nav-bar);
 }
+#showImg {
+  backdrop-filter: blur(5px);
+  margin: 10rem 20rem;
+  height: 38rem;
+  width: 50rem;
+}
+
+.teamcode-data {
+  width: 44rem;
+  padding: 0.5rem;
+}
+.dialog {
+  padding: 1rem;
+  padding-left: 3rem;
+  height: 30rem;
+}
+.data-contain {
+  background-color: #3d008b;
+  color: white;
+}

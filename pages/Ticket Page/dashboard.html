@@ -22,18 +22,21 @@
       <nav class="navbar container-fluid sticky-top header">
         <!-- navbar -->
         <div class="container nav-container">
-          <a class="navbar-brand nav-href nav-" href="../Ticket Page/dashboard.html">
+          <a
+            class="navbar-brand nav-href nav-"
+            href="../Ticket Page/dashboard.html"
+          >
             <!-- <img class="logo" src="#" alt="#" /> -->
-            Title
+            Pupdesk
           </a>
         </div>
         <ul class="nav-bar">
           <li class="nav--items">
             <a class="nav-link link" href="./dashboard.html">Dashboard</a>
           </li>
-          <li class="nav--items">
+          <li class="nav--items tickets-nav">
             <a
-              class="nav-link link dropdown-toggle"
+              class="nav-link link tickets-nav dropdown-toggle"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
@@ -65,14 +68,36 @@
             >
           </li>
         </ul>
-        <div class="profile-setting">
-          <a href="../Ticket Page/profile.html">
-            <img
-              class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
-            />
+        <div class="dropdown profile-setting">
+          <a
+            class="btn dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img class="profile-logo" alt="profile" />
           </a>
+
+          <ul class="dropdown-menu profile-drop">
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
+                >Log out</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
@@ -80,18 +105,18 @@
       <div class="ticket-count container-fluid">
         <div class="total-ticket total">
           <h4 class="tot-ticket tot">Total Tickets</h4>
-          <p class="count">24</p>
+          <p class="count tot-ticket-count">0</p>
         </div>
         <div class="total-ticket">
           <h4 class="tot-ticket close">Ticket Closed</h4>
-          <p class="count">24</p>
+          <p class="count closed-tickets-count">0</p>
         </div>
         <div class="total-ticket high-priority">
           <h4 class="tot-ticket high">
             High Priority<br />
             Tickets
           </h4>
-          <p class="count priority-count">24</p>
+          <p class="count priority-count">0</p>
         </div>
       </div>
       <div class="container-fluid">
@@ -122,6 +147,54 @@
     crossorigin="anonymous"
   ></script>
   <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+    let user = window.localStorage.getItem("userEmail");
+
+    let profiles;
+    let team;
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
+        (validation) => user === validation["email"]
+      );
+      console.log(valid);
+      if (valid !== undefined) {
+        team = userData[i];
+        profiles = valid;
+      }
+    }
+
+    console.log(user, profiles);
+
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
+    console.log(team);
+    let closeTickets = document.querySelector(".closed-tickets-count");
+    if (team.closedTickets !== undefined) {
+      closeTickets.innerText = team.closedTickets.length;
+    } else {
+      closeTickets.innerText = 0;
+    }
+
+    let totalTickets = document.querySelector(".tot-ticket-count");
+    let highPriorityTickets = document.querySelector(".priority-count");
+
+    if (team["tickets"] !== undefined) {
+      let highPriorityTicketsCount = team.tickets.filter(
+        (e) => e["priority"] === "High"
+      );
+      let openTickets = team.tickets.filter((e) => e["status"] === "Open");
+      document.querySelector(".open").innerText = openTickets.length;
+      totalTickets.innerText = team["tickets"].length;
+      highPriorityTickets.innerText = highPriorityTicketsCount.length;
+    }
+
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
     var xValues = [1, 2, 3, 4, 5, 6, 7];
     var yValues = [7, 8, 8, 26, 14, 8, 17];
     new Chart("myChart", {

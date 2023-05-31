@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tickets</title>
+    <title>Old Tickets</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,7 +23,7 @@
         <div class="container nav-container">
           <a class="navbar-brand nav-href nav-" href="./dashboard.html">
             <!-- <img class="logo" src="#" alt="#" /> -->
-            Title
+            Pupdesk
           </a>
         </div>
         <ul class="nav-bar">
@@ -54,7 +54,7 @@
             </ul>
           </li>
           <li class="nav--items">
-            <a class="nav-link link" href="../Ticket Page/tickets.html"
+            <a class="nav-link link" href="../Ticket Page/history.html"
               >History</a
             >
           </li>
@@ -64,56 +64,213 @@
             >
           </li>
         </ul>
-        <div class="profile-setting">
-          <a href="./profile.html">
-            <img
-              class="profile-logo"
-              src="../../assets/images/person-circle.svg"
-              alt=""
-            />
+        <div class="dropdown profile-setting">
+          <a
+            class="btn dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img class="profile-logo" alt="profile-pic" />
           </a>
+
+          <ul class="dropdown-menu profile-drop">
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="../Ticket Page/profile.html"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item log-out"
+                onclick="clearData()"
+                href="../../index.html"
+                >Log out</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
     <section class="tickets-row">
-      <div class="tickets-column">
-        <div class="table-heading">
-          <div class="name-heading">Name</div>
-          <div class="subject-heading">Subject</div>
-          <div class="status-heading">Status</div>
-          <div class="priority-heading">Priority</div>
-          <!-- <button class="create-ticket btn">
-            <img src="../../assets/images/ticket-perforated.svg" alt="new-ticket-icon" class="class"></i>
-            New
-          </button> -->
-        </div>
-        <div class="single-ticket-container">
-          <div class="ticket-name">
-            Gowtham Krishna Sathyamoorthy
-            <div class="ticket-id">#0123345</div>
-          </div>
-          <div class="ticket-issue">I Don't Know anything In DSA</div>
-          <div class="ticket-status">Closed</div>
-          <div class="ticket-priority">
-            High
-            <div class="high--priority"></div>
-          </div>
-        </div>
-        <div class="single-ticket-container">
-          <div class="ticket-name">
-            Mohammad Ajmal
-            <div class="ticket-id">#0123347</div>
-          </div>
-          <div class="ticket-issue">Small confusion In JS</div>
-          <div class="ticket-status">Closed</div>
-          <div class="ticket-priority">
-            Medium
-            <div class="medium-priority"></div>
-          </div>
-        </div>
-      </div>
+      <div class="tickets-list"></div>
     </section>
   </body>
+  <script>
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
+    let userData = JSON.parse(window.localStorage.getItem("signinData"));
+    let user = window.localStorage.getItem("userEmail");
+    let profiles;
+    let team;
+    for (let i = 0; i < userData.length; i++) {
+      let valid = userData[i]["members"].find(
+        (validation) => user === validation["email"]
+      );
+      if (valid !== undefined) {
+        team = userData[i];
+        profiles = valid;
+      }
+    }
+
+    if (user === null) {
+      window.location.href = "../SignIn_login/login.html";
+    }
+    document
+      .querySelector(".profile-logo")
+      .setAttribute("src", profiles["profileLink"]);
+    function clearData() {
+      localStorage.removeItem("userEmail");
+    }
+    let tickets = team["closedTickets"];
+    // console.log(tickets);
+    function listTicket(obj, ticket) {
+      let linkedPage = document.createElement("a");
+      linkedPage.setAttribute("href", "./deatails.html?id=" + ticket["id"]);
+      linkedPage.classList.add("redirection");
+      let singleContainer = document.createElement("div");
+      singleContainer.classList.add("single-ticket-container");
+
+      let teamMembers = obj["members"];
+      let raiser = teamMembers.find((e) => e["email"] === ticket["from"]);
+      let nameAndProfPic = document.createElement("div");
+      nameAndProfPic.classList.add("name-profile");
+      let profilePic = document.createElement("img");
+      profilePic.setAttribute("src", raiser["profileLink"]);
+      profilePic.classList.add("profile-logo", "ticket-pic");
+      nameAndProfPic.append(profilePic);
+      let raiserName = document.createElement("div");
+      raiserName.classList.add("ticket-name");
+      if (ticket["reply-as"] === "Anonymous") {
+        raiserName.innerText = ticket["reply-as"];
+      } else {
+        raiserName.innerText = raiser["name"];
+      }
+      let ticketId = document.createElement("div");
+      ticketId.classList.add("ticket-id");
+      ticketId.innerText = "#" + ticket["id"];
+      raiserName.append(ticketId);
+      nameAndProfPic.append(raiserName);
+      singleContainer.append(nameAndProfPic);
+
+      let subjectContainer = document.createElement("div");
+      subjectContainer.classList.add("subject-container");
+      let subjectTitle = document.createElement("div");
+      subjectTitle.classList.add("ticket-subject");
+      subjectTitle.innerText = "Subject :";
+      subjectContainer.append(subjectTitle);
+      let subject = document.createElement("div");
+      subject.classList.add("ticket-issue");
+      subject.innerText = ticket["summary"];
+      subjectContainer.append(subject);
+      singleContainer.append(subjectContainer);
+
+      let lines = ticket["description"].split(",");
+      let description = document.createElement("p");
+      description.classList.add("description");
+      let desc = "";
+      for (let i = 0; i < lines.length; i++) {
+        desc += lines[i] + "\n";
+      }
+      description.innerText = desc;
+      singleContainer.append(description);
+      let priorityAndStatus = document.createElement("div");
+      priorityAndStatus.classList.add("proirity-status");
+
+      let statusContainer = document.createElement("div");
+      statusContainer.classList.add("status-container");
+      let statusTitle = document.createElement("div");
+      statusTitle.classList.add("status");
+      statusTitle.innerText = "Status :";
+      statusContainer.append(statusTitle);
+      let status = document.createElement("div");
+      status.classList.add("ticket-status");
+      status.innerText = ticket["status"];
+      statusContainer.append(status);
+      priorityAndStatus.append(statusContainer);
+
+      // console.log(new Date(ticket["id"]).toLocaleTimeString());
+
+      let priorityContainer = document.createElement("div");
+      priorityContainer.classList.add("proirity-container");
+      let priorityTitle = document.createElement("div");
+      priorityTitle.classList.add("proirity");
+      priorityTitle.innerText = "Priority :";
+      priorityContainer.append(priorityTitle);
+      let priority = document.createElement("div");
+      priority.classList.add("ticket-priority");
+      priority.innerText = ticket["priority"];
+      let prioritySignal = document.createElement("div");
+      if (ticket["priority"] === "High") {
+        prioritySignal.classList.add("high--priority");
+      } else if (ticket["priority"] === "Medium") {
+        prioritySignal.classList.add("medium-priority");
+      } else {
+        prioritySignal.classList.add("low-priority");
+      }
+      priority.append(prioritySignal);
+      priorityContainer.append(priority);
+      priorityAndStatus.append(priorityContainer);
+      singleContainer.append(priorityAndStatus);
+
+      let timeAndDateContainer = document.createElement("div");
+      timeAndDateContainer.classList.add("time-date");
+      singleContainer.append(timeAndDateContainer);
+      let date = document.createElement("p");
+      date.classList.add("create-date");
+      date.innerText =
+        `Created On  ${new Date(ticket["id"]).toLocaleDateString()}  ${new Date(
+          ticket["id"]
+        ).toLocaleTimeString()}` +
+        "'\n\n" +
+        `Closed On  ${new Date(
+          ticket["closeTime"]
+        ).toLocaleDateString()}  ${new Date(
+          ticket["closeTime"]
+        ).toLocaleTimeString()}`;
+      timeAndDateContainer.append(date);
+      linkedPage.append(singleContainer);
+      return linkedPage;
+    }
+
+    let ticketCol = document.querySelector(".tickets-list");
+
+    let noDataFind;
+    if (tickets !== undefined) {
+      for (let i = tickets.length - 1; i > -1; i--) {
+        console.log(tickets[i]);
+        if (tickets[i]["reply-as"] === "Anonymous") {
+          ticketCol.append(listTicket(team, tickets[i]));
+        } else if (
+          tickets[i]["reply-as"] === "Post With Name" ||
+          tickets[i]["from"] === user
+        ) {
+          ticketCol.append(listTicket(team, tickets[i]));
+        } else {
+          ticketCol.append(listTicket(team, tickets[i]));
+        }
+      }
+      noDataFind = document.getElementsByClassName("single-ticket-container");
+    } else {
+      let nodata = document.createElement("img");
+      nodata.classList.add("nodata");
+      nodata.setAttribute("src", "../../assets/images/no_data.jpg");
+      ticketCol.append(nodata);
+    }
+
+    if (noDataFind.length === 0) {
+      let nodata = document.createElement("img");
+      nodata.classList.add("nodata");
+      nodata.setAttribute("src", "../../assets/images/no_data.jpg");
+      ticketCol.append(nodata);
+    }
+  </script>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
