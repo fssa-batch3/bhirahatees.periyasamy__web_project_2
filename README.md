@@ -1,4 +1,4 @@
-I want to create a ticket management system to notice our problem and they raise tickets for our higher officials.
+Many students find it hard to talk to their teachers about their problems or questions. This makes learning difficult because they can't get the help they need. It also makes students frustrated and less interested in school. 
 
 Problem Statement : https://docs.google.com/document/d/15cXOAlMmd4-NRgM5ffqQ8DVyWa0Lm4Vb/edit
 
